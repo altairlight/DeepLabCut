@@ -1,7 +1,7 @@
 # deeplabcut_kaist
-Upgraded DeepLabCut for Synaptic Brain Dysfunctions Lab in KAIST, South Korea.
+Changed DeepLabCut for Synaptic Brain Dysfunctions Lab in KAIST, South Korea.
 
-Forked from commit ce44697 of https://github.com/AlexEMG/DeepLabCut and some of it's codes have been fixed. 
+Forked from commit https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8 and some of it's codes have been fixed. 
 
 You can use this code by 3 steps.
 
@@ -21,10 +21,10 @@ You can use this code by 3 steps.
     
     6)Video_files_other
     
-    But you know, I'm sorry that I cannot share project folders and video files through github website(also we have copyright issues) 
+    But you know, I'm sorry that I cannot share full project folders(2, 3) and video files(5, 6) through github website(because of copyright issues and problem with size of this git repo) 
     
-    So, if you need the files and you can prove you are related to Synaptic Brain Dysfunctions Lab in KAIST, you could get them from me(altairlight@kaist.ac.kr) or from Ms.WooHyeon Kim.
+    So, if you need the files and you can prove you are related to our Synaptic Brain Dysfunctions Lab in KAIST, you could get the data from me(altairlight@kaist.ac.kr) or from Ms.WooHyeon Kim.
 
-3. Now, you can follow my manual in altairlight/deeplabcut_kaist/Desktop_Files/Deeplabcut Guide and enjoy your projects!
+3. Now, you can follow my manual in Desktop_Files/Deeplabcut Guide and enjoy your projects!
 
 Also please contact to altairlight@kaist.ac.kr if you got stuck on some problems. Thanks!
