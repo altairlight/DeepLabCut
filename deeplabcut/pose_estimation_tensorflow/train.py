@@ -83,6 +83,20 @@ def train(config_yaml,displayiters,saveiters,maxiters,max_to_keep=5):
     cfg = load_config(config_yaml)
     cfg['batch_size']=1 #in case this was edited for analysis.
     
+    #Edited by KAIST Team
+    #cfg['weigh_part_predictions'] = True
+    #cfg['global_scale']=3.0
+    cfg['intermediate_supervision']=True
+    cfg['global_scale'] = 0.8
+    cfg['regularize']=True
+    cfg['weight_decay']=0.001
+    #cfg['mirror']=True
+    cfg['multi_step']=[[0.001, 1030000]]
+    cfg['display_iters']=50000
+    cfg['save_iters']=50000
+    cfg['scale_jitter_lo']=0.5
+    cfg['scale_jitter_up']=1.25
+
     dataset = create_dataset(cfg)
     batch_spec = get_batch_spec(cfg)
     batch, enqueue_op, placeholders = setup_preloading(batch_spec)
