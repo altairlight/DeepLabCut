@@ -1,0 +1,210 @@
+1.LinearChamber2.ipynb파일을 연다(cmd를 관리자 권한으로 열고, cd c:\users\user\desktop이라고 친 뒤, jupyter notebook을 치고 기다리면 크롬창이 열린다. 거기서 들어가면 된다.)
+*AttributeError: '_tkinter.tkapp' object has no attribute 'createfilehandler' 에러는 무시해도 됨(https://github.com/AlexEMG/DeepLabCut/issues/99). tkinter의 이전 커밋을 가져오면 이 에러가 뜨지 않지만 버전 충돌로 다른 여러 문제들이 생겨서 그냥 다시 최신 커밋을 사용하기로 했음.
+*_xsrf' argument missing from post에러 혹은 Notebook Validation Error가 날 경우
+jupyter notebook이 사용하는 토큰이 안맞아서 생기는 문제인데 그냥 새로운 cmd를 열고 크롬창을 열어 새롭게 토큰을 받으면 해결된다.
+아니면 위 이슈처럼 경로 문제로 인해 추가로 나타나는 에러일 수도 있다.
+*간혹가다 cmd창에서 jupyter notebook을 쳤는데, 아무 메세지도 안뜨고 크롬창이 안뜬 채로 계속되는 경우가 있다.
+이 경우 키보드 아무거나 눌러서(예: 방향키) 인터럽트를 주면 된다.
+
+2.import deeplabcut(shift + enter를 누르면 실행되면서 옆에 []안에 *이 생긴다. *은 실행 중이라는 의미이며 숫자가 뜰 때까지 기다리는 것이 좋다)
+이후 refine labels등을 하다보면 함수가 끝났음에도 *이 안사라지는 문제가 생기기도 한다(아주 깔끔하게 생성한 오브젝트들을 다 클리어한 것은 아닌 것 같다)
+이럴 때는 현재 열고 있는 jupyter notebook을 shutdown시키고, 다시 그 jupyter notebook을 열면 해결된다. 물론 shutdown시키기 전에 코드를 수정했다면 ctrl+s로 저장하는 것이 좋다.
+그 밖에 training혹은 create labeled video를 하다보면 메모리(RAM)혹은 디스크 공간(C드라이브, SSD)를 다써버려서 컴퓨터가 정상작동을 하지 않는 경우도 있다(재수 없으면 블루스크린까지 뜬다)
+이때는 어쩔 수 없이 재부팅해야하고, 이후 어떻게든 디스크 공간을 비워주어야 한다(일부파일들을 HDD로 옮기면 됩니다)
+물론 이런 일이 없도록 메모리 계산을 미리 해보는 것이 좋다.
+
+3.task, experimenter를 자유롭게 채우고 video에 트레이닝을 시킬 영상을 넣어준다.
+*트레이닝 시킬 영상을 여러개 넣어도 되고 하나만 넣어도 되지만 경험적으로 하나의 영상에서 많이 추출하는 것이 더 좋은 것으로 보인다(15개에서 10개씩 / 하나에서 150개를 비교했을 때 하나에서 150개를 따는 것이 나은 것 같음)
+*여기서 중요한 것이 받은 실험 영상들중 .mpg로 되어 있는 것이 있고, .MPG로 되어있는 것이 있다(물론 나중에 에러를 띄워주므로 알 수 있지만, 가급적이면 동영상의 속성에 들어가 확인하는 것을 추천한다. .mpg냐 .MPG냐 그게그거지라고 하다가 처음부터 다시해야되는 경우도 생긴다...)
+
+4.deeplabcut.create_new_project(task,experimenter,video, working_directory='C:\\Users\\user\\Desktop',copy_videos=False)를 실행한다(왜 \\가 두개에요?는 윈도우즈에서 파이썬을 써야하기 때문인데 자세한 설명은 생략한다)
+여기서 앞으로 working_directory를 포함한 모든 주소는 띄어쓰기가 없어야만 한다. 예를들어 Linear Chamber라는 폴더가 있다면, LinearChamber로 이름을 바꾸어주어야하며, Trial  1.mpg라는 영상이 있다면, Trial1.mpg로 바꾸어주어야한다. 이를 빠르게 할 수 있는 프로그램으로는 darknamer가 있으며 네이버 자료실에서 쉽게 다운 받을 수 있다. 이것 때문에 원인 모를 에러들이 많이 날 수 있으니 뒤에 훈련, 분석할 때도 계속해서 조심하길 바람.  
+여기서 working_directory를 마음대로 해도되긴 하나 SSD가 있는 디스크를 사용해야 트레이닝이 20배는 빠를 것이다. copy_videos는 폴더로 비디오를 카피해올 것인가를 묻는 parameter인데 copy_videos=True로 해도 메모리만 잡아먹고 크게 이득보는게 없는 것 같아서 False로 했다.
+*False로 할경우 symlink파일이 생기는데 이거를 다른 드라이브로 옮길 때 안 옮겨지는 경우가 있다. True로 하면 이런일이 안 생긴다는 이점을 가진다(1/29)
+
+5.이제 working_directory 하위에 폴더(위 경우는 바탕화면)가 생겼을 것이다. 거기에 있는 config.yaml을 notepad++로 연다.
+수정해야할 것&설명(반드시 수정할것- 1번, 4번, 7번, 11번, 16번, 17번)
+    1)TrainingFraction을 0.8으로 바꾼다(왜 0.8로 해야하는가?는 논문에서 그렇게 했기때문...).
+    2)alphavalue는 레이블할 때 점의 컬러의 투명도를 말하는데 편한대로 바꾸면 된다.
+    3)batch_size는 CNN에서의 batch의 size를 말하는데 어짜피 실험 영상이 2^n의 배수로 짤려서 줄리가 없고 그렇게 짜르기도 매우 귀찮으므로 건드리지 않는다(나중에 알아서 1로 바뀌어서 변수에 들어감.)
+    4)bodyparts를 원하는 대로 바꾼다. 나중에 추가가 가능한 것 같기는 한데 상당히 골치아파지므로 여기서 다 결정하고 가는 것이 좋다.
+    5)colormap은 jet나 gist_rainbow 둘 다 좋으므로 둘 중 아무거나 골라서 쓰면 된다.
+    6)corner2move2는 레이블 예측이 화면 밖으로 날라갔을 때 refine할 수 있도록 레이블 점의 위치를 조정해주는 용도인데 (50,50)을 기본으로 설정되어 있다. 편한대로 바꾸면 된다.
+    7)cropping은 나중에 분석할 때(트레이닝 할 때 말고) 영상을 자를 것인가를 묻는 것이다. 보통 자르는게 처리 속도에서 이득을 본다.
+    8)dotsize는 레이블 할 때 점의 크기를 말한다. 편한대로 바꾸면 된다.
+    9)지금은 iteration은 건드리지 마세요! 알아서 제깍제깍 바꿉니다. 이전 dlc_model의 iteration으로 분석하고 싶을 때 바꿀 수도 있는데, 이는 다시 설명할 예정입니다.
+    10)move2corner는 위에서 설명한 대로 예측이 날라갔을 때 점의 위치를 옮길 것인가를 묻는 것이다. refine을 하고싶으면 true로 해야만 한다.
+    11)numframes2pick은 각 트레이닝 영상당 몇개의 프레임을 추출할 것이냐를 묻는 것이다. 보통 하나의 영상에서 150개를 한다.
+    12)pcutoff는 얼마까지의 오차범위를 허용할 것인가인데 안 건드리는게 좋아보인다.
+    13)resnet은 resnet 네트워크 레이어의 개수인데, 50과 101 두개가 있다. 물론 101이 더 오래걸리지만 더 좋다.
+    14)snapshotindex는 나중에 다시 설명할 예정입니다
+    15)start와 stop은 영상의 어디부터 어디까지 트레이닝 셋을 뽑을 것인지를 결정하는 것이다. 0~1이면 영상의 처음부터 끝까지이고, 0.5~1이면 영상의 절반에서 끝까지이다.
+    16)video_sets의 crop이 트레이닝 할 때 영상을 잘라서 트레이닝 시킬 것을 묻는 것이다. 자르는게 처리 속도에서 이득을 보지만 노이즈에서 약해질 수도 있다. 그래도 자르는게 여러모로 더 좋아보임.
+    17)x1, x2, y1, y2는 7번에서 말한 cropping의 위치를 정한다. 트레이닝 영상과 비슷한 영상이라면 똑같이 자르면 된다.
+*반드시 수정하고 ctrl+s로 저장하는 것을 잊지 말자!
+그리고 다음 명령어를 실행한다.
+%matplotlib inline
+path_config_file = 'C:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\config.yaml' # Enter the path of the config file that was just created from the above step (check the folder)
+이 때, path_config_file에 1월 7일이 아니고 위에서 create_new_project할 때 생긴 폴더가 있을 것이다. 그 폴더의 config.yaml파일의 주소를 넣어주면 된다.
+
+6.다음 명령어를 실행한다.
+deeplabcut.extract_frames(path_config_file,'automatic','kmeans',crop=True, checkcropping=False)
+*automatic으로 안할 경우 프레임을 골라서 뽑을 수 있다. 그러나 특별한 경우가 아니라면 추천은 하지 않음.
+*kmean가 uniform으로 추출하는 것보다 느리지만 더 다양한 프레임을 뽑을 확률이 높아진다. 그렇게 느리지 않아서 kmeans로 하는 것을 추천함.
+*crop은 config.yaml파일의 video_sets의 crop에서 설정한대로 트레이닝 셋을 짜를 것인가를 묻는 것이다.
+*checkcropping은 영상 crop을 미리 확인 할 수 있다. 처음 할 때는 true로 하는 것을 추천함. 그러나 트레이닝 시킬 영상 개수가 많으면 일일이 몇분마다 계속 물어보므로 False로 반드시 해두어야 한다.
+*대충 한 10분정도 걸린다.
+
+7. %gui wx
+deeplabcut.label_frames(path_config_file, Screens=2, winHack=0.5)
+위 명령어를 통해 레이블링을 시작한다.
+Screen이 1개일 때는 screen=1로하고 winHack을 0.5로 해야하는지 1로 해야하는지 모르겠는데 둘 중 하나가 맞을 것이다(다음 사용자가 수정바람..), 그리고 만약 모니터가 세로로 두개라던가 4개라던가 하는 경우라면 https://github.com/AlexEMG/DeepLabCut에 들어가서 issue를 확인해 볼것(monitor라고 검색하면 나올 것이다.)
+이 때, 추출한 사진들의 크기가 최대한 크게 나오는 것이 레이블링에 유리하다. 그를 위해서는, 코드를 수정해야할 필요가 있을 수도 있다. 영상의 크기가 화면을 벗어나도록 넘치거나(넘치면 메모리 에러도 날 수 있음) 너무작다면 당황하지말고, C:\Users\user\Anaconda3\envs\DLC2_copy\Lib\site-packages\deeplabcut\generate_training_dataset으로 들어가 labeling_toolbox.py를 관리자 권한으로 연다. 수정을 위해 pycharm을 설치하는 것을 추천하지만 꼭 설치할 필요는 없음. 지금부터 3군데를 수정하면 된다. 
+1)우선 browseDir 함수에서 self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])를 찾는다. []안에 들어가는 flaot(정수를 넣으면 에러가 날겁니다^^)의 의미는 차례대로 [left, bottom, width, height]이다. 이거를 잘 맞게 수정해주면 됩니다. 여기에서 수정하고, ipynb파일을 셧다운하고 다시열고, import deeplabcut(1번), path_config_file설정(5번), label_frames(7번)해서 파일을 열어보면 확인할 수 있다. 이 과정을 계속 반복하면서 최적화된 값을 찾으면 된다. 다시말하지만, 레이블 할 때의 영상의 크기가 굉장히 중요하다.
+2)next_image 함수에서 똑같은게 또 있을 것이다. self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0] * 45) / float(self.gui_width), float(self.img_size[1] * 45) / float(self.gui_height)]) 요거를 똑같이 고친다.
+3)마지막으로 OnSliderScroll 함수에서도 self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0] * 45) / float(self.gui_width), float(self.img_size[1] * 45) / float(self.gui_height)]) 요거를 똑같이 고쳐주면 끝. 다 고치고 나서 저장하고, ipynb파일을 셧다운하고 다시열고, 1)에서 설명한대로 1번5번7번해서 다시 열면된다.
+*Direct Interaction에서 첫 번째 사진을 열었을 때 Radiobox 선택이 안되는 문제를 발견함(1/15 11:48)
+Next Image를 누른 이후 다음 이미지부터는 Radiobox가 정상작동하므로 일단은 첫 번째 사진에서는 그냥 다 마킹해놓고 refine_labels로 가서 삭제하기로 한다.
+*위 버그의 해결책을 만들었음(1/15 1:18)
+아래 방향키를 누르면 Restart가 가능하도록 만들었음. 레이블한게 다 지워지며(canvas destroy) 새로 시작하도록 했으며 radiobox가 작동안될 경우에도 사용 가능함
+*레이블에서 실수를 했는데 처음부터 다시해야하나요?
+아니요, 그냥 다한 뒤에 저장하고, refine_labels로 가서 refine existing labels를 체크하고 h5파일을 열어서 수정하시면 됩니다. 이 과정을 꼭 거치시는 것을 추천합니다.
+혹은 아래 방향키로 Restart를 하시면 됩니다(1/15)
+*아니 refine_labels에서 고쳤는데 previous label누르니까 안 바뀌어 있어요!
+previous label을 누르면 저장했던게 날라가지는 않는데 기존 레이블을 보여주는 것으로 생각됩니다. 저는 그냥 그래서 이 과정을 두 번 했었습니다.
+refine labels의 주의할 것을 참고하세요!(1/29)
+*레이블을 추가하고 싶은데요?
+extract_frames로 가서 automatic이 아니라 manual로 고치고 프레임을 다시뽑아서 그 훈련셋을 다시 넣어야 합니다.
+*중간에 dot size 크기를 바꿀 경우 기존 점의 색깔들이 없어지는 사소한 버그가 있긴하나 무시가능함. 그래도 혹시 데이터에 어떤 영향을 끼칠 수도 있으니 미리 바꿔놓고 하는게 좋다.
+*폐색되었거나, 화질이 안좋아서 레이블을 아예 할 수가 없습니다. 그냥 넘어가도 되나요?
+네. 넘어가도 됩니다. 특히 폐색된 경우 넘어가는게 더 좋은 것 같습니다. 레이블을 하지 않은 프레임들은 이후 create_training_dataset에서 포함하지 않으므로(https://github.com/AlexEMG/DeepLabCut/blob/1677956a4b393c78474612e3f540a9abdf3a3664/deeplabcut/generate_training_dataset/trainingsetmanipulation.py, 427번~445번 라인, NaN data drop) 그 부분도 걱정하지 않으셔도 됩니다(즉 트레이닝 세트에 아예 들어가지 않습니다. 제가 그랬습니다만, 못믿겠으면.. matlab으로 training-datasets 폴더에 있는 .mat파일을 열어보세요! 아예 레이블하지 않은 프레임들은 안들어갑니다.)
+폐색된 프레임들이 매우 많을 경우 폐색된 프레임을 많이 추가하여(기존 150개라면 300개 추가?)높은 정확도를 얻을 수 있습니다(1/29)
+*그럼 메모리가 낭비되고 디스크 공간도 아까운데, 그렇게 레이블을 안한 사진들을 없애버려도 되나요?
+그 사진들을 없애면, 에러가 날겁니다.
+사실 그런 사진 1000개(프로젝트 몇 개를 몇 번씩 잘못 프레임을 추출하더라도 1000개가 되긴 어려울 겁니다)가 있어도, 200MB 안쪽이기 때문에 큰 부담이 없었고, 그래서 저는 구현을 하지 않았습니다만.. 방법은 있습니다.
+더 발전시켜서 사진 제거와 그에 따른 h5와 csv의 동기화 버튼을 만들 수도 있을 것입니다(그러나 지금은 h5파일을 수정할 수 있는 프로그램을 찾지 못한다면 방법이 없는 것 같습니다)
+대충 방법을 설명하자면 다음과 같습니다.
+먼저 csv파일에서 지우고 싶은 사진들의 목록을 싹다 날려줍니다. 해당하는 사진들도 같이 없애줍니다.
+그리고 h5파일을 수정할 수 있는 프로그램이 있으면 그걸 써서 목록을 똑같이 날려주면 됩니다. 하지만 저는 그 프로그램을 찾지 못했고ㅠㅠ 이후 찾는 분이 계신다면 이 글을 수정해주시길 부탁드립니다.
+수정할 수 있는 프로그램이 없다면.. 파이썬(혹은 matlab도 될 것 같네요)으로 코드를 짜서 csv파일의 정보를 h5로 옮겨주면 됩니다. 즉, 동기화를 해주어야 합니다. csv파일을 dataframe으로 바꾸고(위 csv_Dataframe= = pd.read_csv(self.dataname, 'df_with_missing')처럼 하면 됩니다), 다시 이 dataframe을 h5파일로 바꾸면 됩니다(csv_Dataframe.to_hdf(os.path.join(self.dir,'CollectedData_'+ self.humanscorer +'.h5'), key='df_with_missing', mode='w'))
+
+이렇게 생각했었는데,
+이유를 모르겠지만 이후 refine labels을 하면,
+DataCombined.to_hdf(os.path.join(self.dir,'CollectedData_'+ self.humanscorer +'.h5'), key='df_with_missing', mode='w')
+DataCombined.to_csv(os.path.join(self.dir,'CollectedData_'+ self.humanscorer +'.csv'))
+refinement.py에 있는 이 코드에 의해 두 개(h5와 csv파일)가 동기화 될 것으로 생각을 했지만, 같지 않습니다.
+그래서 파이썬으로 csv파일의 정보를 h5로 옮기는 코드를 위처럼 그냥 짠다면 안 될 것으로 생각되고, 추가적인 데이터 처리가 필요할 것으로 보입니다.
+
+참고로 같은지 확인하는 방법은, refinement.py로 들어가면 249번라인 쯔음에(browseDir 함수) 다음과 같은 코드가 있습니다.
+if os.path.isfile(self.dataname):
+    self.Dataframe = pd.read_hdf(self.dataname,'df_with_missing')
+이 코드를 다음과 같이 바꾸어주고,
+if os.path.isfile(self.dataname):
+    csv_Dataframe = pd.read_csv(self.dataname, 'df_with_missing')
+    self.Dataframe = pd.read_hdf(self.dataname,'df_with_missing')
+    print(csv_Dataframe.equals(self.Dataframe))
+refine_labels 함수를 실행하고 h5 파일을 열었을 때, jupyter notebook에 나오는 값이 true인지, false인지를 확인하면 됩니다.
+
+그래서 결국 파이썬(또는 다른 코드)에서 csv파일로 h5를 덮기 위한 추가적인 데이터 처리를 공부하거나, h5파일을 수정하는 방법을 알면 되는데,
+아직까지는 그렇게 critical하다고 생각되지 않은 부분이고 다른 일들로 바쁘기도 해서 구현을 하지 않았습니다ㅠㅠ
+이후 혹시 구현을 해주시는 분이 있다면(혹은 deeplabcut 커뮤니티에서 누군가 구현을 했더라면) 수정해주시면 감사드리겠습니다.
+
+8. 다음 명령어로 트레이닝 셋을 만든다.
+deeplabcut.create_training_dataset(path_config_file)
+이 과정은 크게 별거 없습니다.
+
+9.다음 명령어로 트레이닝을 시작한다.
+deeplabcut.train_network(path_config_file, gputouse=0, max_snapshots_to_keep=None)
+*gpu가 0개이면 'None', n개이면 n-1개를 적어주면 된다.
+*max_snapshots_to_keep을 왜 None로 하게 되었는지는 기억이 나지 않는다.. 큰 상관이 없기는 했던 것 같은데 github issue를 참고하길 바람.
+*max_iter(훈련 횟수)를 비롯한 여러 파라미터를 고치고 싶다면? C:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-1\LinearChamber2Jan7-trainset80shuffle1\train (create_new_project에서 생성된 폴더>>dlc-model>>현재 iteration폴더>>현재 훈련 폴더>>train 폴더에 들어가서 우선 pose_cfg.yaml를 연다. 그리고 C:\Users\user\Anaconda3\envs\DLC2_copy\Lib\site-packages\deeplabcut\pose_estimation_tensorflow에 들어가서도 default_config.py를 연다.
+이 두 파일들에 파라미터들이 있는데, somehow 여기서 고쳐도 반영이 안되어버리는 경우가 많다(?????). 그래서 그냥 C:\Users\user\Anaconda3\envs\DLC2_copy\Lib\site-packages\deeplabcut\pose_estimation_tensorflow에서 train.py를 열고 train 함수에서 직접 고쳐주는 것이 제일 좋다. 이미 #Edit by KAIST Team이라고 해서 이런저런것들을 고쳐놓았다. 혹시모르니 프로젝트를 새로 팠다면 기존 프로젝트의 pose_cfg.yaml 파일과 default_config파일을 참고해서 고치거나, 아니면 트레이닝을 시작할때 모든 파라미터를 두번 출력해준다(뒤에 출력나오는 것이 실제로 train에 반영되는 파라미터이다. 두개의 출력이 다를 수 있다). 뒤에 출력되는 걸 보면서 하나하나 고쳐나가면 된다. 중요한 파라미터들은 지금 소개한다.
+1)save_iters, display_iters는 몇 iteration마다 출력, 저장을 할 것인가를 결정한다. 보통 1030000번 할 때는 50000씩 저장하고 10000씩 print를 했었다. 너무많이 저장하거나 출력할 경우 여러가지 문제가 있는데 먼저 하나의 save당 169MB가 필요하므로 디스크 메모리가 중간에 부족해질 수도 있고, 두번째로 print를 많이 해서 속도가 저하될 수 있으며(에이 그게 얼마나 차이나겠어요?라고 저도 생각했었는데 꽤 차이가 납니다), 마지막으로 chrome에서 출력을 계속하는 거기 때문에 chrome 페이지를 띄울 메모리가 부족해 크롬이 꺼지거나 심하면 블루 스크린까지 뜰 수가 있다. 따라서 메모리 계산을 잘해서 100개 안쪽으로 저장하도록, 500개 안쪽으로 출력하도록 하는 것을 추천한다.
+2)multi_step는 더블리스트로 이루어져있으며, 트레이닝 횟수(max_iter)를 결정한다. 리스트의 맨 뒤에있는 리스트의 두번째 값이 트레이닝 횟수이다. 첫번째값은 learning_rate인데 learning_rate를 결정하는 파라미터가 따로 또 있고(weight_decay) 이 값을 따른다. 그래서 그냥 weight_decay와 같게 해주면 문제없어보인다.
+3)regularize, intermediate_supervision은 네트워크 훈련의 성능을 올려준다. 하는게 좋다.
+*다른 설정들은 제가 고생하면서 최적화를 해놓았지만, 더 공부하셔서 고치셔도 됩니다(물론 더 안좋아질 수도 있습니다ㅎㅎ 제가 그렇게 한 데에는 다 이유들이 있었어요ㅠㅠ 공부는 코드보면서 함수를 찾아서 하셔도되고, https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#i-video-analysis-and-plotting-results) 여기에 간략하게 몇개의 파라미터가 설명이 되어있기도 하니 참고하시면 될 것 같습니다) 무턱대로 true로 바꾸면 좋아지겠지? 하다가 난리날 수 있으니 잘 생각해서 고치시길 바랍니다ㅎㅎ
+*1030000번에 이틀이 소요됩니다. 논문에서 이렇게 했는데 음.. 몇번이 좋은지는 아직도 저도 애매한 것 같아요. 103000번까지 여러개를 저장하고 그중에 best iteration을 고르는게 최선으로 보입니다.
+*KAIST 시냅스 뇌질환 연구단에서 사용 중인 29.87fps의 카메라로 촬영한 실험들에 대해서 150~2000개 정도의 레이블링을 사용한다면 5000번씩 출력/저장하며 총 300000만 iteration까지해서 그중에 best iteration(test error가 가장 낮은 것)을 고르는게 가장 적절한 것임을 알아냄(1/28)
+*이전 훈련부터 계속하고 싶다면?
+create_new_project에서 생긴 폴더에서 dlc-model로 들어가고 쭉쭉쭉 들어가서 pose_cfg.yaml을 찾아 init_weight을 다음과 같이 바꾸면 됩니다.
+init_weights: C:\Users\user\Desktop\LinearChamber-KAIST-2018-11-19\dlc-models\iteration-0\LinearChamberNov19-trainset95shuffle1\train\snapshot-350000
+즉 create_new_project>>dlc-models>>현재 iteration폴더>>현재 훈련 폴더>>train폴더 안에 있는 원하는 snapshot을 골라주면 됩니다.
+*어어?? iteration이 다시 0부터 시작하는데요?
+매우 잘 retrain하고 있는 중입니다. 자세한 것은 https://github.com/AlexEMG/DeepLabCut/issues/135를 참고하시면 됩니다(제가 질문드렸었습니다ㅎㅎ).
+*이전 훈련부터 계속하고 싶은데, bodyparts를 다르게 설정했었어요! 그래도 될까요?
+일단 매우 신기하게도, 돌아가기는 합니다(1/18)
+그러나 더 좋은 결과를 가져오는 지는 아직 보지 못했습니다.
+더 좋은 결과를 가져오는 것으로 확인 되었습니다(1/28)
+실제로 test error가 많이 낮아집니다. 계속해서 transfer learning(네트워크 위에 네트워크를 또 엎어서 훈련하는 것을 말함)을 해보는게 좋은 방법으로 보입니다.
+*트레이닝 두개를 동시에 돌릴 수 있나요?
+gpu 개수가 하나라면 안됩니다. CUDNN의 lock을 얻어서 사용하므로 한번에 여러개를 돌릴 수 없습니다(컴퓨터가 몇분동안 멈추거나 진짜 재수없으면 블루스크린도 뜹니다!)
+gpu 개수가 2개이상이고 gputouse 번호를 다르게 줘서한다면 문제가 없을 것으로 보입니다(저는 그렇게 해보지 못했습니다ㅠㅠ) 
+
+10.deeplabcut.evaluate_network(path_config_file, plotting=False, gputouse=0)으로 훈련한 네트워크를 평가합니다. 하지만 이거를 하기전에, create_new_project에서 만들어진 폴더 안에있는 config.yaml파일에서 snapshot_index를 적절히 고쳐주어야 합니다.
+-1은 맨 마지막 iteration 네트워크를 평가하겠다는 것을 의미합니다(1030000번 했었다면 1030000번께 되겠죠?).
+all은 훈련시킨 모든 네트워크를 평가하겠다는 것을 의미합니다. 따라서 처음이면 all로 해서 train error와 test error의 추이를 쭉 살펴보는 것이 좋습니다.
+-1, all이아니고 숫자로 7, 혹은 리스트로 [1,3,5]이런 식으로 훈련시킬 네트워크의 인덱스를 지정할 수도 있습니다.
+plotting은 여기서 해도 되는데 어짜피 끝에서 합니다.
+평가는 하나의 네트워크당 3분정도 걸립니다.
+
+11.평가 이후에는, create_new_project에서 만들어진 폴더 안에 있는 evaluation-results 폴더에서 csv파일과 h5파일로 에러의 결과를 확인할 수 있습니다. 그 중 test error가 가장 낮은 것을 고르는 것이 이론적으로는 가장 좋습니다. 예를 들어, 50000번씩 저장했고, 50000번에서 test error가 가장 낮다면 50000번을 골라쓰면 되긴하는데, 이런 경우라면 1000번씩 100000번까지 한번 더해서 53000번에서 가장 높을지, 아니면 72000번(혹은 43000?)에서 높을지 확인해볼 것 같습니다.
+
+12.이제 원하는 영상을 분석합니다. 그를 위해서 video_path에 원하는 영상의 목록을 넣어주어야하는데 이를 편하게 할 수 있도록 제가 코드를 어느정도 짜놓았습니다.
+import os
+
+def get_full_filenames(dirname, extension='None'):
+    full_filenames=[]
+    filenames = os.listdir(dirname)
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)
+        
+        if extension != "None":
+            ext = os.path.splitext(full_filename)[-1]
+            if extension==ext: 
+                full_filenames.append(full_filename)
+        else:
+            full_filenames.append(full_filename)
+    return full_filenames
+
+videofile_path=[]
+full_foldernames=get_full_filenames("C:\\Users\\user\\Desktop\\Video_files_other")
+for full_foldername in full_foldernames:
+    full_videonames=get_full_filenames(full_foldername, extension='.mpg')
+    videofile_path.extend(full_videonames)
+
+get_full_filenames의 사용법은 다음과 같습니다.
+full_foldernames=get_full_filenames("C:\\Users\\user\\Desktop\\Video_files_other")는 "C:\\Users\\user\\Desktop\\Video_files_other" 하위에 있는 모든 파일을 읽어와 리스트로 저장한다는 뜻입니다. 그런데 video_files_other 밑에는 folder가 여러개 있지요. 폴더의 경로들이 리스트로 저장됩니다. 그리고 각 폴더의 경로들을 for loop로 돌면서, full_videonames=get_full_filenames(full_foldername, extension='.mpg')와 videofile_path.extend(full_videonames)를 실행합니다. 그러면 확장자가 .mpg인 파일들을 각 폴더에서 긁어서 videofile_path에 계속해서 더해줍니다(extend)
+
+단순히 하나만 넣을 것이라면,
+videofile_path = [] #Enter the list of videos to analyze.
+videofile_path.append('C:\\Users\\user\\Desktop\\Video_files_Deeplabcut\\LinearChamber\\20180906\\20180906_Trial2.mpg')
+이런 식으로 넣으면 됩니다.
+적절히 코드를 잘 이용해서 영상을 넣으시면 됩니다. 무섭다면 print(videofile_path)를 통해 확인할 수도 있습니다.
+영상을 잘 넣은 것이 확인되었다면
+deeplabcut.analyze_videos(path_config_file,videofile_path, videotype='.mpg', gputouse=0, save_as_csv=True)를 통해 비디오를 분석합니다. videotype을 알맞게 설정해주고 csv로 저장할 것이라면 save_as_csv를 True로 설정해주면 됩니다.
+여기서 처음이라면 당연히 iteration이 0이겠지만, Training Fraction등을 바꾸었다거나, refine_labels를 하고나서 merge dataset을 했다면, iteration이 올라가있을 겁니다(1,2,3,...) 현재 iteration이 3인데 영상은 2번째 iteration으로 분석하고 싶다면 create_new_project할 때 만들어진 폴더로 가셔서 config.yaml에서 iteration을 2로 바꿔주시면 됩니다. 참고호 iteration을 all로 납두시면, -1로 바뀌어서 맨 마지막 iteration을 분석하게 됩니다.
+분석은 영상 하나에 5분정도 걸립니다. 결과로는 csv파일(save_as_csv를 true로 했다면)과 h5파일이 나올겁니다.
+*분석도 트레이닝과 마찬가지로 CUDNN의 lock을 얻어서 사용하므로 한번에 여러개를 돌릴 수 없습니다(반면 create labeled video는 cmd 창을 여러개 띄우고 ipynb파일을 각각 열어서 여러개를 한번에 돌릴 수 있습니다)
+
+13.deeplabcut.create_labeled_video(path_config_file,videofile_path, videotype='mpg', save_frames = True, delete=False, displayedbodyparts='all')를 통해 레이블된 영상을 만듭니다. displayedbodyparts=['Nose, TailBase']와 같이 보여지는 bodyparts를 고를 수도 있습니다. 그리고 save_frames = True, delete=False로 하면 프레임을 저장하고 지우지 않는데, 이는 메모리를 상당히 많이 잡아먹지만 중간에 어쩌다 동작이 중지될 경우(정전, 메모리 초과(생각보다 상당히 자주일어납니다!), 블루 스크린 등등...) 중간부터 다시 시작할 수 있게 해주며 프레임을 저장하면 나중에 다시 확인도 가능해지게 됩니다. 그래서 가급적이면 하는게 좋습니다.
+이 때 조심해야 할 것이 레이블을 저장하는 temp파일이 이미있을경우 프레임을 만들지 않는데, iteration이 달라도 이 폴더의 이름은 같습니다(예:temp-20180906_Trial2) 그래서, 이럴 경우 temp파일을 다른곳으로 치워놓던가 삭제하고 실행시키면 됩니다. 그리고 레이블된 영상을 만드는 것은 하나에 30분정도 걸립니다.
+
+14. %matplotlib notebook
+deeplabcut.plot_trajectories(path_config_file,videofile_path)로 plotting을 할 수 있습니다. 하지만 그렇게 의미있는 데이타들은 아닌 것 같네요. 그냥 참고하시면 될 것 같습니다.
+
+15. deeplabcut.extract_outlier_frames(path_config_file,videofile_path, outlieralgorithm='jump', comparisonbodyparts=["Snout", "TailBase"], epsilon=120, automatic=False)로 결과(test error, 혹은 영상을 봤더니 마음에 안들더라)가 마음에 안들경우 outlier frame을 추출할 수 있습니다. outlieralgorithm으로는 'fitting', 'jump', 'uncertain'이 있으며 보통 'fitting'은 epsilon을 필요로하고, 몇만번 학습시키다보면 거의 없어지지만 그래도 체크를 하는게 좋습니다. 'jump' 알고리즘은 epsilon을 필요로하고 epsilon에 해당하는 픽셀거리보다 더 튀어나가는 프레임들을 잡아내줍니다. 'uncertain'은 p_bound를 필요로하며 네트워크가 생각하기에 likelihood(p)가 p_bound보다 작은 놈들을 잡아내줍니다. automatic을 true로하면 몇개를 찾든 물어보지않고 최대 10개씩 추출하고, false로 하면 몇개인지 확인을 거쳐서 추출의 여부를 결정할 수 있습니다. 보통 처음에 false로 해서 epsilon이나 likelihood를 어느정도 조정을 한다음에 true로 바꾸어 쭉 추출합니다.
+경험적으로, jump에 대해서 50~100개 정도 더 추출하는 것이 좋고, likelihood에 대해서는 10개정도만 더 추출해도 좋습니다. likelihood의 경우 p_bound를 낮게 잡아 딱 10개정도에서 10개만 뽑는다기보다, p_bound를 그냥 0.01정도로 잡아서 수많은 이미지들 중에 uniform하게 프레임들을 가져오도록 하는 것이 좋아보입니다. p_bound를 낮게 잡아서 뽑았더니 붙어있는 프레임들만 추출이 됩니다. jump는 반대로 epsilon을 조정하여 추출되는 프레임을 50~100에 가깝게 만들고 그 정도를 다 뽑으면 됩니다.
+*10개가 아니라 더 많이 추출하고 싶어요
+config.yaml의 numframes2pick을 고치면 됩니다.
+
+16.refine labels & merge dataset
+이 부분은 label하는 거랑 매우 비슷해서 똑같이 하시면 됩니다.
+*refine을 한 뒤에, 다시 refine labels 함수로 GUI창을 여니까 레이블했던게 날라갔어요. 다시 레이블 해야되나요??
+label하게되면 그 정보는 기존 CollectedData_KAIST(csv와 h5파일)에 추가로 저장됩니다. 그리고 refine labels할 때 여는 파일은 machinelabels 파일입니다. 따라서 기존 레이블을 다시 보고 싶다면 adjust original labels?를 체크한 후, CollectedData_KAIST.h5파일을 열어 확인하면 됩니다.
+*refine을 한 뒤에, labeled-data 폴더에 있는 labeled 이미지들이 바뀌지 않아요. 다시 레이블 해야되나요??
+아니요. 개내들은 원래 끝까지 안바뀝니다.. 아마도 check labels 함수를 쓰면 바뀌는 것으로 보입니다.
+*주의할 것(이걸 몰라서 제가 여태까지 몇일을 날려왔습니다. 매우 중요함!!!)
+예를 들어 100개 프레임의 refine labels를 하는데, 50개까지하고 save를 했다면, CollectedData_KAIST.h5에 100개 프레임중 앞에 50개프레임은 수정한채로, 뒤에 50개프레임은 수정이 안된 채로 저장이 될 겁니다. 여기에서 refine label로 다시 GUI창을 열고 뒤에 50개를 수정한 뒤 저장을 하면, CollectedData_KAIST.h5에 100개 프레임중 앞에 50개프레임은 수정이 안된채로, 뒤에 50개프레임은 수정한채로 저장이 됩니다. 즉, 기존 앞의 50개를 수정이 안된 것으로 덮어쓰게됩니다! 이에 대한 해결책은 save를 하지 않고 한번에 끝까지 하거나, 혹은 일부까지하고 세이브를 했다면 adjust original labels?를 체크한 후 CollectedData_KAIST.h5파일을 열어 그 이후 프레임들을 수정하면 됩니다. 사실 처음부터 adjust original labels?를 체크한 후 프레임들을 수정해도 문제가 없는 것으로 보이는데 왜 머신 데이터 파일을 불러오는 것을 따로 만들었는지는 의문이 듭니다(다른 것은 pcutoff를 설정하여 낮은 정확도의 점들이 속이 비어있는 동그라미로 보인다는 것 뿐인데, 어짜피 결국에 저장되는 것은 점들의 좌표들이라서...)
+*Extract outlier frames 이후 처음으로 adjust original labels?를 체크한 후 CollectedData_KAIST.h5파일을 열면 extract한 프레임들이 없습니다. 그래서 처음에는 refine labels를 반드시 하고 저장하는 절차를 밟아야만 합니다(1/20)
+*Linear Chabmer Image들에서 나타나는 주의할 점
+무슨 이유에선지 모르겠지만, 오른쪽 위 구석에 점들이 숨어있는 경우가 있습니다. 특히 파란색 점이 구석에 있을 경우 잘 안보이므로 항상 오른쪽 위 구석을 살펴봐주세요(그냥 냅두면, 트레이닝에 악영향을 끼치기 때문에 반드시 제거를 하거나 옮겨주어야합니다)
