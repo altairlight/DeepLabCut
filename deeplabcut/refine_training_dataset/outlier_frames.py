@@ -136,6 +136,14 @@ def extract_outlier_frames(config,videos,shuffle=1,trainingsetindex=0,outlieralg
                   Indices=np.argsort(d)[::-1][:cfg['numframes2pick']*2]
 
           Indices=np.sort(list(set(Indices))) #remove repetitions.
+          # debug mode(for extracting lost indices)
+          #Indices = np.sort([4230])
+          #Indices = np.sort([5510])
+          #Indices = np.sort([5509])
+          #Indices = np.sort([16892])
+          #Indices = np.sort([16890])
+          #Indices = np.sort([861])
+
           print("Method ", outlieralgorithm, " found ", len(Indices)," putative outlier frames.")
           print("Do you want to proceed with extracting ", cfg['numframes2pick'], " of those?")
           if outlieralgorithm=='uncertain':
@@ -470,6 +478,10 @@ def refine_labels(config,Screens=1,scale_w=.8,scale_h=.9, winHack=1, img_scale=.
     --------
 
     """
+    # Edited by KAIST Team
+    img_scale = 0.015
+    scale_w = 2.0
+    scale_h = 0.95
     wd = Path(config).resolve().parents[0]
     os.chdir(str(wd))
     from deeplabcut.refine_training_dataset import refinement

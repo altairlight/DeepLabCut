@@ -27,6 +27,7 @@ import yaml
 from pathlib import Path
 from deeplabcut.refine_training_dataset import auxfun_drag
 from matplotlib.backends.backend_wxagg import NavigationToolbar2WxAgg as NavigationToolbar
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 # ###########################################################################
 # Class for GUI MainFrame
 # ###########################################################################
@@ -59,56 +60,56 @@ class MainFrame(wx.Frame):
         self.size=displaysize
         
         wx.Frame.__init__(self, None, title="DeepLabCut2.0 - Refinement GUI", size=(self.gui_width*winHack, self.gui_height*winHack), style= wx.DEFAULT_FRAME_STYLE)
-
+        self.Maximize(True)
         
 
 # Add SplitterWindow panels top for figure and bottom for buttons
-        self.split_win = wx.SplitterWindow(self)
+        """self.split_win = wx.SplitterWindow(self)
         # self.top_split = wx.Panel(self.split_win, style=wx.SUNKEN_BORDER)
         self.top_split = MatplotPanel(self.split_win,config) # This call/link the MatplotPanel and MainFrame classes which replaces the above line
         self.bottom_split = wx.Panel(self.split_win, style=wx.SUNKEN_BORDER)
-        self.split_win.SplitHorizontally(self.top_split, self.bottom_split, self.gui_height*.9)
+        self.split_win.SplitHorizontally(self.top_split, self.bottom_split, self.gui_height*.8)
 
         self.top_split.SetBackgroundColour((255, 255, 255))
-        self.bottom_split.SetBackgroundColour((74, 34, 101))
+        self.bottom_split.SetBackgroundColour((74, 34, 101))"""
 
         self.statusbar = self.CreateStatusBar()
         self.statusbar.SetStatusText("")
 # Add Buttons to the bottom_split window and bind them to plot functions
-        self.Button1 = wx.Button(self.bottom_split, -1, "Load Labels", size=(150, 40), pos=(self.gui_width*.1, self.gui_height*.01))
+        self.Button1 = wx.Button(self, -1, "Load Labels", size=(150, 60), pos=(self.gui_width * .1, self.gui_height * .9))
         self.Button1.Bind(wx.EVT_BUTTON, self.browseDir)
 
-        self.Button5 = wx.Button(self.bottom_split, -1, "Help", size=(60, 40), pos=(self.gui_width*.2, self.gui_height*.01))
+        self.Button5 = wx.Button(self, -1, "Help", size=(150, 60), pos=(self.gui_width * .2, self.gui_height * .9))
         self.Button5.Bind(wx.EVT_BUTTON, self.help)
         self.Button5.Enable(True)
 
-        self.Button3 = wx.Button(self.bottom_split, -1, "Previous Image", size=(150, 40), pos=(self.gui_width*.35, self.gui_height*.01))
+        self.Button3 = wx.Button(self, -1, "Previous Image", size=(150, 60), pos=(self.gui_width * .3, self.gui_height*.9))
         self.Button3.Bind(wx.EVT_BUTTON, self.prevImage)
         self.Button3.Enable(False)
 
-        self.Button2 = wx.Button(self.bottom_split, -1, "Next Image", size=(130, 40), pos=(self.gui_width*.45, self.gui_height*.01))
+        self.Button2 = wx.Button(self, -1, "Next Image", size=(150, 60), pos=(self.gui_width * .4, self.gui_height * .9))
         self.Button2.Bind(wx.EVT_BUTTON, self.nextImage)
         self.Button2.Enable(False)
 
-        self.Button4 = wx.Button(self.bottom_split, -1, "Save", size=(100, 40), pos=(self.gui_width*.6, self.gui_height*.01))
+        self.Button4 = wx.Button(self, -1, "Save", size=(150, 60), pos=(self.gui_width * .5, self.gui_height * .9))
         self.Button4.Bind(wx.EVT_BUTTON, self.save)
         self.Button4.Enable(False)
 
-        self.close = wx.Button(self.bottom_split, -1, "Quit", size=(100, 40), pos=(self.gui_width*.69, self.gui_height*.01))
+        self.close = wx.Button(self, -1, "Quit", size=(150, 60), pos=(self.gui_width * .6, self.gui_height * .9))
         self.close.Bind(wx.EVT_BUTTON,self.quitButton)
         self.close.Enable(True)
 
-        self.adjustLabelCheck = wx.CheckBox(self.top_split, label = 'Adjust original labels?',pos = (self.gui_width*.1, self.gui_height*.85))
+        self.adjustLabelCheck = wx.CheckBox(self, label = 'Adjust original labels?',pos = (self.gui_width*.1, self.gui_height*.88))
         self.adjustLabelCheck.Bind(wx.EVT_CHECKBOX,self.adjustLabel)
-        
-        self.Button5 = wx.Button(self.top_split,-1,"Zoom", size=(60,30),pos=(self.gui_width*.6,self.gui_height*.85))
-        self.Button5.Bind(wx.EVT_BUTTON,self.zoom)
-        
-        self.Button6 = wx.Button(self.top_split,-1,"Pan", size=(60,30),pos=(self.gui_width*.65,self.gui_height*.85))
-        self.Button6.Bind(wx.EVT_BUTTON,self.pan)
-        
-        self.Button7 = wx.Button(self.top_split,-1,"Home", size=(60,30),pos=(self.gui_width*.7,self.gui_height*.85))
-        self.Button7.Bind(wx.EVT_BUTTON,self.home)
+
+        self.Button8 = wx.Button(self, -1, "Zoom", size=(150, 60), pos=(self.gui_width * .4, self.gui_height * .83))
+        self.Button8.Bind(wx.EVT_BUTTON,self.zoom)
+
+        self.Button7 = wx.Button(self, -1, "Pan", size=(150, 60), pos=(self.gui_width * .5, self.gui_height * .83))
+        self.Button7.Bind(wx.EVT_BUTTON,self.pan)
+
+        self.Button6 = wx.Button(self, -1, "Home", size=(150, 60), pos=(self.gui_width * .6, self.gui_height * .83))
+        self.Button6.Bind(wx.EVT_BUTTON,self.home)
          
         self.Bind(wx.EVT_CLOSE,self.closewindow)
 
@@ -170,7 +171,18 @@ class MainFrame(wx.Frame):
         self.drs = []
         self.updatedCoords = []
         plt.close(self.fig1)
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        # self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        # Edited by KAIST Team
+        self.fig1 = plt.figure(figsize=self.img_size, facecolor="None")
+        # Linear Chamber
+        # self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        # Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0] * 45) / float(self.gui_width),
+                                         float(self.img_size[1] * 45) / float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+        # self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
         self.markerSize = (self.slider.GetValue())
         imagename1 = os.path.join(self.project_path,self.index[self.iter])
         im = PIL.Image.open(imagename1)
@@ -179,7 +191,7 @@ class MainFrame(wx.Frame):
             self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem) + " "+ " Threshold chosen is: " + str("{0:.2f}".format(self.threshold))))
         else:
             self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem)))
-        self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+        self.canvas = FigureCanvas(self, -1, self.fig1)
         MainFrame.plot(self,im,im_axis)
         self.toolbar = NavigationToolbar(self.canvas)
         MainFrame.confirm(self)
@@ -215,7 +227,17 @@ class MainFrame(wx.Frame):
             self.Close(True)
         dlg.Destroy()
 
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #Edited by KAIST Team
+        self.fig1 =  plt.figure(figsize=self.img_size, facecolor = "None")
+        #Linear Chamber
+        #self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        #Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+        #self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
         try:
             self.dataname = str(self.data_file)
         except:
@@ -224,7 +246,10 @@ class MainFrame(wx.Frame):
         self.iter = 0
 
         if os.path.isfile(self.dataname):
+            #Edited by KAIST Team
+            #csv_Dataframe = pd.read_csv(self.dataname, 'df_with_missing')
             self.Dataframe = pd.read_hdf(self.dataname,'df_with_missing')
+            #print(csv_Dataframe.equals(self.Dataframe))
             self.scorer = self.Dataframe.columns.get_level_values(0)[0]
             bodyParts = self.Dataframe.columns.get_level_values(1)
             _, idx = np.unique(bodyParts, return_index=True)
@@ -242,13 +267,13 @@ class MainFrame(wx.Frame):
             im_axis = self.ax1f1.imshow(im,self.colormap)
 
             if self.file == 0:
-                self.checkBox = wx.CheckBox(self.top_split, label = 'Adjust marker size.',pos = (self.gui_width*.43, self.gui_height*.85))
+                self.checkBox = wx.CheckBox(self, label='Adjust marker size', pos=(self.gui_width * .2, self.gui_height * .88))
                 self.checkBox.Bind(wx.EVT_CHECKBOX,self.onChecked)
-                self.slider = wx.Slider(self.top_split, -1, self.markerSize, 0, 20,size=(200, -1),  pos=(self.gui_width*.43, self.gui_height*.8),style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS )
+                self.slider = wx.Slider(self, -1, 18, 0, 20, size=(456, -1), pos=(self.gui_width * .15, self.gui_height * .85), style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)
                 self.slider.Bind(wx.EVT_SLIDER, self.OnSliderScroll)
                 self.slider.Enable(False)
             
-            self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+            self.canvas = FigureCanvas(self, -1, self.fig1)
             self.colorparams = list(range(0,(self.num_joints+1)))
             MainFrame.plot(self,im,im_axis)
             self.toolbar = NavigationToolbar(self.canvas)
@@ -269,13 +294,24 @@ class MainFrame(wx.Frame):
                     self.updatedCoords = []
                     plt.close(self.fig1)
                     self.canvas.Destroy()
-                    self.fig1, (self.ax1f1) = plt.subplots(figsize=(12, 7.8),facecolor = "None")
+                    # self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+                    # Edited by KAIST Team
+                    self.fig1 = plt.figure(figsize=self.img_size, facecolor="None")
+                    # Linear Chamber
+                    # self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+                    # Direct Interaction
+                    self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0] * 45) / float(self.gui_width),
+                                                     float(self.img_size[1] * 45) / float(self.gui_height)])
+                    divider = make_axes_locatable(self.ax1f1)
+                    self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+                    self.fig1.add_axes(self.ax2)
+                    # self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
                     #imagename1 = os.path.join(self.dir,self.index[self.iter])
                     imagename1 = os.path.join(self.project_path,self.index[self.iter])
                     im = PIL.Image.open(imagename1)
                     im_axis = self.ax1f1.imshow(im,self.colormap)
                     self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem) + " "+ " Threshold chosen is: " + str("{0:.2f}".format(self.threshold))))
-                    self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+                    self.canvas = FigureCanvas(self, -1, self.fig1)
                     MainFrame.plot(self,im,im_axis)
                     MainFrame.confirm(self)
                     self.toolbar = NavigationToolbar(self.canvas)
@@ -306,8 +342,19 @@ class MainFrame(wx.Frame):
         self.Button3.Enable(True)
         self.checkBox.Enable(False)
         self.slider.Enable(False)
+        self.ax1f1.clear()
         self.iter = self.iter + 1
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor="None")
+        #self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #Edited by KAIST Team
+        self.fig1 =  plt.figure(figsize=self.img_size, facecolor = "None")
+        #Linear Chamber
+        #self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        #Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+        #self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
 
         # Checks for the last image and disables the Next button
         if len(self.index) - self.iter == 1:
@@ -330,7 +377,7 @@ class MainFrame(wx.Frame):
                 self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem) + " "+ " Threshold chosen is: " + str("{0:.2f}".format(self.threshold))))
 
 
-            self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+            self.canvas = FigureCanvas(self, -1, self.fig1)
             if np.max(im) == 0:
                 msg = wx.MessageBox('Invalid image. Click Yes to remove', 'Error!', wx.YES_NO | wx.ICON_WARNING)
                 if msg == 2:
@@ -352,7 +399,7 @@ class MainFrame(wx.Frame):
                     self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem)))
                 else:
                     self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ self.index[self.iter] + " "+ " Threshold chosen is: " + str("{0:.2f}".format(self.threshold))))
-                self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+                self.canvas = FigureCanvas(self, -1, self.fig1)
                 print(self.iter)
             MainFrame.plot(self,im,im_axis)
             self.toolbar = NavigationToolbar(self.canvas)
@@ -370,8 +417,19 @@ class MainFrame(wx.Frame):
         self.checkBox.Enable(False)
 #        self.cb.SetValue(False)
         self.slider.Enable(False)
+        self.ax1f1.clear()
         plt.close(self.fig1)
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor="None")
+        #self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #Edited by KAIST Team
+        self.fig1 =  plt.figure(figsize=self.img_size, facecolor = "None")
+        #Linear Chamber
+        #self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        #Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+        #self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
         self.iter = self.iter - 1
 
         # Checks for the first image and disables the Previous button
@@ -395,7 +453,7 @@ class MainFrame(wx.Frame):
                 self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem)))
             else:
                 self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ str(Path(self.index[self.iter]).stem) + " "+ " Threshold chosen is: " + str("{0:.2f}".format(self.threshold))))
-            self.canvas = FigureCanvas(self.top_split, -1, self.fig1)
+            self.canvas = FigureCanvas(self, -1, self.fig1)
             MainFrame.plot(self,im,im_axis)
             self.toolbar = NavigationToolbar(self.canvas)
         else:
@@ -512,7 +570,7 @@ class MainFrame(wx.Frame):
         """
 
         # self.canvas = FigureCanvas(self, -1, self.fig1)
-        cbar = self.fig1.colorbar(im_axis, ax = self.ax1f1)
+        cbar = self.fig1.colorbar(im_axis, cax = self.ax2)
         #small hack in case there are any 0 intensity images!
 
         maxIntensity = np.max(im)
