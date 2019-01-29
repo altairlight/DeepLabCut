@@ -16,11 +16,13 @@ import matplotlib.patches as patches
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 import os.path
-from pathlib import Path
 import argparse
 import yaml
+from pprint import pprint
+from pathlib import Path
 from deeplabcut.generate_training_dataset import auxfun_drag_label
 from matplotlib.backends.backend_wxagg import NavigationToolbar2WxAgg as NavigationToolbar
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 # ###########################################################################
 # Class for GUI MainFrame
@@ -55,6 +57,7 @@ class MainFrame(wx.Frame):
         self.size=displaysize
         
         wx.Frame.__init__(self, None, title="DeepLabCut2.0 - Labeling GUI", size=(self.gui_width*winHack, self.gui_height*winHack), style= wx.DEFAULT_FRAME_STYLE)
+        self.Maximize(True)
 
         self.statusbar = self.CreateStatusBar()
         self.statusbar.SetStatusText("")
@@ -63,25 +66,25 @@ class MainFrame(wx.Frame):
         self.SetBackgroundColour("#ffffff")
 
         buttons_list = []
-        self.Button1 = wx.Button(self, -1, "Load Frames", size=(150, 40), pos=(self.gui_width*.1, self.gui_height*.9))
+        self.Button1 = wx.Button(self, -1, "Load Frames", size=(150, 60), pos=(self.gui_width*.1, self.gui_height*.9))
         self.Button1.Bind(wx.EVT_BUTTON, self.browseDir)
         self.Button1.Enable(True)
         buttons_list.append(self.Button1)
 
-        self.Button5 = wx.Button(self, -1, "Help", size=(80, 40), pos=(self.gui_width*.3, self.gui_height*.9))
+        self.Button5 = wx.Button(self, -1, "Help", size=(150, 60), pos=(self.gui_width*.2, self.gui_height*.9))
         self.Button5.Bind(wx.EVT_BUTTON, self.help)
         self.Button5.Enable(True)
         buttons_list.append(self.Button5)
 
-        self.Button2 = wx.Button(self, -1, "Next Frame", size=(120, 40), pos=(self.gui_width*.4, self.gui_height*.9))
+        self.Button2 = wx.Button(self, -1, "Next Frame", size=(150, 60), pos=(self.gui_width*.3, self.gui_height*.9))
         self.Button2.Bind(wx.EVT_BUTTON, self.nextImage)
         self.Button2.Enable(False)
         buttons_list.append(self.Button2)
         
-        self.Button4 = wx.Button(self, -1, "Save", size=(80, 40), pos=(self.gui_width*.6, self.gui_height*.9))
+        self.Button4 = wx.Button(self, -1, "Save", size=(150, 60), pos=(self.gui_width*.5, self.gui_height*.9))
         self.Button4.Bind(wx.EVT_BUTTON, self.save)
         self.Button4.Enable(False)
-        self.close = wx.Button(self, -1, "Quit", size=(80, 40), pos=(self.gui_width*.8, self.gui_height*.9))
+        self.close = wx.Button(self, -1, "Quit", size=(150, 60), pos=(self.gui_width*.6, self.gui_height*.9))
         self.close.Bind(wx.EVT_BUTTON,self.quitButton)
         buttons_list.append(self.Button4)
         buttons_list.append(self.close)
@@ -89,15 +92,15 @@ class MainFrame(wx.Frame):
 # add buttons for  zoom
         # radio buttons position: (1250, 65)
 
-        self.Button8 = wx.Button(self,-1,"Zoom", size=(60,30),pos=(self.gui_width*.65, self.gui_height*.85))
+        self.Button8 = wx.Button(self,-1,"Zoom", size=(150, 60),pos=(self.gui_width*.4, self.gui_height*.83))
         self.Button8.Bind(wx.EVT_BUTTON,self.zoom)
         buttons_list.append(self.Button8)
 
-        self.Button7 = wx.Button(self,-1,"Pan", size=(60,30),pos=(self.gui_width*.75, self.gui_height*.85))
+        self.Button7 = wx.Button(self,-1,"Pan", size=(150, 60),pos=(self.gui_width*.5, self.gui_height*.83))
         self.Button7.Bind(wx.EVT_BUTTON,self.pan)
         buttons_list.append(self.Button7)
 
-        self.Button6 = wx.Button(self,-1,"Home", size=(60,30),pos=(self.gui_width*.85, self.gui_height*.85))
+        self.Button6 = wx.Button(self,-1,"Home", size=(150, 60),pos=(self.gui_width*.6, self.gui_height*.83))
         self.Button6.Bind(wx.EVT_BUTTON,self.home)
         buttons_list.append(self.Button6)
 
@@ -139,6 +142,12 @@ class MainFrame(wx.Frame):
     def OnKeyPressed(self, event=None):
         if event.GetKeyCode() == wx.WXK_RIGHT:
             self.nextImage(event=None)
+        elif event.GetKeyCode() == wx.WXK_DOWN:
+            self.Restart(event=None)
+        """
+        elif event.GetKeyCode() == wx.WXK_LEFT:
+            self.Restart2()
+        """
 
     def zoom(self,event):
         self.statusbar.SetStatusText("Zoom")
@@ -168,6 +177,10 @@ class MainFrame(wx.Frame):
         wx.MessageBox('1. Select one of the body parts from the radio buttons to add a label (if necessary change config.yaml first to edit the label names). \n\n2. RIGHT clicking on the image will add the selected label. \n The label will be marked as circle filled with a unique color. \n\n3. Hover your mouse over this newly added label to see its name. \n\n4. LEFT click and drag to move the label position. \n\n5. To change the marker size mark the checkbox and move the slider. Uncheck this after it is adjusted! Then advance to the next frame (you cannot zoom or pan again on this image). \n Change the markersize only after finalizing the position of your FIRST LABEL! \n\n6. Once you are happy with the position, select another body part from the radio button. \n Be careful, once you add a new body part, you will not be able to move the old labels. \n\n7. Click Next Frame to move to the next image. \n\n8. When finished labeling all the images, click \'Save\' to save all the labels as a .h5 file. \n\n9. Click OK to continue using the labeling GUI.', 'User instructions', wx.OK | wx.ICON_INFORMATION)
 
     def onClick(self,event):
+        #pprint(vars(event))
+        if event.dblclick==True:
+            #event.button=1;
+            return;
         x1 = event.xdata
         y1 = event.ydata
         self.drs = []
@@ -232,12 +245,24 @@ class MainFrame(wx.Frame):
         #self.relativeimagenames=[n.split(self.project_path+'/')[1] for n in self.index]
         self.relativeimagenames=['labeled'+n.split('labeled')[1] for n in self.index]
         
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        #Edited by KAIST Team
+        self.fig1 =  plt.figure(figsize=self.img_size, facecolor = "None")
+        #Linear Chamber
+        #self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        #Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+        #self.ax2 = self.fig1.add_axes([0.8, 0.1, 30/float(self.gui_width), float(self.img_size[1]*52)/float(self.gui_height)])
         self.iter = 0
         self.buttonCounter = []
         im = io.imread(self.index[self.iter])
 
         im_axis = self.ax1f1.imshow(im, self.colormap)
+        #Edited by KAIST Team
+        #self.ax1f1.imshow(im, cmap='gray', aspect="equal", interpolation='gaussian', vmin=0, vmax=255)
 
         img_name = Path(self.index[self.iter]).name # self.index[self.iter].split('/')[-1]
         self.ax1f1.set_title(str(str(self.iter+1)+"/"+str(len(self.index)) +" "+ img_name ))
@@ -255,15 +280,33 @@ class MainFrame(wx.Frame):
           _, idx = np.unique(oldBodyParts, return_index=True)
           oldbodyparts2plot =  list(oldBodyParts[np.sort(idx)])
           self.bodyparts =  list(set(self.bodyparts) - set(oldbodyparts2plot))
-          self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate",pos=(self.gui_width*.83, self.gui_height*.1), choices=self.bodyparts, majorDimension =1,style=wx.RA_SPECIFY_COLS,validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
-          self.option = self.rdb.Bind(wx.EVT_RADIOBOX,self.onRDB)
-          cbar = self.fig1.colorbar(im_axis, ax = self.ax1f1)
-          cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)-1))))
+          #Linear Chamber
+          #self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate", pos=(self.gui_width * .7, self.gui_height * .65), choices=self.bodyparts, majorDimension=1, style=wx.RA_SPECIFY_COLS, validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+          #Direct Interaction
+          self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate", pos=(self.gui_width * .77, self.gui_height * .07), choices=self.bodyparts, majorDimension=1, style=wx.RA_SPECIFY_COLS, validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+          self.option = self.rdb.Bind(wx.EVT_RADIOBOX, self.onRDB)
+          cbar = self.fig1.colorbar(im_axis, cax = self.ax2, orientation="vertical")
+          #cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)-1))))
+          one_tick = int(np.floor(np.max(im) / len(self.bodyparts)))
+          #Direct Interaction
+          one_tick = one_tick + 2
+          start_point=int(np.floor(one_tick/2))
+          cbar.set_ticks(range(start_point, np.max(im), one_tick))
           cbar.set_ticklabels(self.bodyparts)
         else:
           self.addLabel.Enable(False)
-          cbar = self.fig1.colorbar(im_axis, ax = self.ax1f1)
-          cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)-1))))
+          # Linear Chamber
+          # self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate", pos=(self.gui_width * .7, self.gui_height * .65), choices=self.bodyparts, majorDimension=1, style=wx.RA_SPECIFY_COLS, validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+          # Direct Interaction
+          self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate", pos=(self.gui_width * .77, self.gui_height * .07), choices=self.bodyparts, majorDimension=1, style=wx.RA_SPECIFY_COLS, validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+          self.option = self.rdb.Bind(wx.EVT_RADIOBOX, self.onRDB)
+          cbar = self.fig1.colorbar(im_axis, cax = self.ax2, orientation="vertical")
+          #cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)-1))))
+          one_tick=int(np.floor(np.max(im)/len(self.bodyparts)))
+          #Direct interaction
+          one_tick = one_tick + 2
+          start_point = int(np.floor(one_tick / 2))
+          cbar.set_ticks(range(start_point, np.max(im), one_tick))
           cbar.set_ticklabels(self.bodyparts)
           self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate",pos=(self.gui_width*.83, self.gui_height*.1), choices=self.bodyparts, majorDimension =1,style=wx.RA_SPECIFY_COLS,validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
           self.option = self.rdb.Bind(wx.EVT_RADIOBOX,self.onRDB)
@@ -286,9 +329,9 @@ class MainFrame(wx.Frame):
             self.dataFrame = pd.concat([self.dataFrame, frame],axis=1)
 
         if self.file == 0:
-            self.checkBox = wx.CheckBox(self, label = 'Adjust marker size.',pos = (self.gui_width*.43, self.gui_height*.85))
+            self.checkBox = wx.CheckBox(self, label = 'Adjust marker size.',pos = (self.gui_width*.385, self.gui_height*.95))
             self.checkBox.Bind(wx.EVT_CHECKBOX,self.onChecked)
-            self.slider = wx.Slider(self, -1, 18, 0, 20,size=(200, -1),  pos=(self.gui_width*.40, self.gui_height*.78),style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS )
+            self.slider = wx.Slider(self, -1, 18, 0, 20,size=(200, -1),  pos=(self.gui_width*.385, self.gui_height*.9),style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS )
             self.slider.Bind(wx.EVT_SLIDER, self.OnSliderScroll)
             self.slider.Enable(True)
 
@@ -316,7 +359,14 @@ class MainFrame(wx.Frame):
         #Refreshing the button counter
         self.buttonCounter = []
         self.rdb.SetSelection(0)
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        self.fig1 = plt.figure(figsize=self.img_size, facecolor="None")
+        # Linear Chamber
+        # self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        # Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0] * 45) / float(self.gui_width), float(self.img_size[1] * 45) / float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
 
         if len(self.index) > self.iter:
             self.updatedCoords = []
@@ -324,8 +374,13 @@ class MainFrame(wx.Frame):
             im = io.imread(self.index[self.iter])
             #Plotting
             im_axis = self.ax1f1.imshow(im,self.colormap)
-            cbar = self.fig1.colorbar(im_axis, ax = self.ax1f1)
-            cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)))))
+            #im_axis = self.ax1f1.imshow(im, cmap=self.colormap, aspect="equal", interpolation='gaussian', vmin=0, vmax=255)
+            cbar = self.fig1.colorbar(im_axis, cax = self.ax2, orientation="vertical")
+            #cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)))))
+            one_tick = int(np.floor(np.max(im) / len(self.bodyparts)))
+            one_tick = one_tick + 2
+            start_point = int(np.floor(one_tick / 2))
+            cbar.set_ticks(range(start_point, np.max(im), one_tick))
             cbar.set_ticklabels(self.bodyparts)
             img_name = Path(self.index[self.iter]).name # self.index[self.iter].split('/')[-1]
             self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ img_name ))
@@ -335,6 +390,62 @@ class MainFrame(wx.Frame):
         # Recreate toolbar for zooming
         self.toolbar = NavigationToolbar(self.canvas)
 
+    def Restart(self, event):
+        """
+        #Edited by KAIST Team(1/15)
+        Restart labeling an image.
+        """
+        from skimage import io
+
+        self.file = 1
+        self.canvas.Destroy()
+        plt.close(self.fig1)
+        self.ax1f1.clear()
+        # Refreshing the button counter
+        self.buttonCounter = []
+        self.rdb.SetSelection(0)
+        self.fig1 = plt.figure(figsize=self.img_size, facecolor="None")
+        # Linear Chamber
+        # self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        # Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0] * 45) / float(self.gui_width), float(self.img_size[1] * 45) / float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
+
+        self.updatedCoords = []
+        # read the image
+        im = io.imread(self.index[self.iter])
+        # Plotting
+        im_axis = self.ax1f1.imshow(im,self.colormap)
+        #im_axis = self.ax1f1.imshow(im, cmap=self.colormap, aspect="equal", interpolation='gaussian', vmin=0, vmax=255)
+        cbar = self.fig1.colorbar(im_axis, cax=self.ax2, orientation="vertical")
+        # cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)))))
+        one_tick = int(np.floor(np.max(im) / len(self.bodyparts)))
+        one_tick = one_tick + 2
+        start_point = int(np.floor(one_tick / 2))
+        cbar.set_ticks(range(start_point, np.max(im), one_tick))
+        cbar.set_ticklabels(self.bodyparts)
+        img_name = Path(self.index[self.iter]).name  # self.index[self.iter].split('/')[-1]
+        self.ax1f1.set_title(str(str(self.iter) + "/" + str(len(self.index) - 1) + " " + img_name))
+        self.canvas = FigureCanvasWxAgg(self, -1, self.fig1)
+        self.cidClick = self.canvas.mpl_connect('button_press_event', self.onClick)
+
+        # Recreate toolbar for zooming
+        self.toolbar = NavigationToolbar(self.canvas)
+
+    """
+    def Restart2(self):
+        self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate", pos=(self.gui_width * .7, self.gui_height * .83), choices=self.bodyparts, majorDimension=1, style=wx.RA_SPECIFY_COLS, validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+        self.option = self.rdb.Bind(wx.EVT_RADIOBOX, self.onRDB)
+        self.checkBox = wx.CheckBox(self, label='Adjust marker size.',
+                                    pos=(self.gui_width * .385, self.gui_height * .95))
+        self.checkBox.Bind(wx.EVT_CHECKBOX, self.onChecked)
+        self.slider = wx.Slider(self, -1, 18, 0, 20, size=(200, -1), pos=(self.gui_width * .385, self.gui_height * .9),
+                                style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS)
+        self.slider.Bind(wx.EVT_SLIDER, self.OnSliderScroll)
+        self.slider.Enable(True)
+    """
     def saveEachImage(self):
         """
         Saves data for each image
@@ -392,12 +503,24 @@ class MainFrame(wx.Frame):
         self.drs = []
         plt.close(self.fig1)
         self.canvas.Destroy()
-        self.fig1, (self.ax1f1) = plt.subplots(figsize=self.img_size,facecolor = "None")
+        self.fig1 = plt.figure(figsize=self.img_size, facecolor="None")
+        # Linear Chamber
+        # self.ax1f1 = self.fig1.add_axes([0.1, 0.29, float(self.img_size[0]*45)/float(self.gui_width), float(self.img_size[1]*45)/float(self.gui_height)])
+        # Direct Interaction
+        self.ax1f1 = self.fig1.add_axes([0.045, 0.265, float(self.img_size[0] * 45) / float(self.gui_width), float(self.img_size[1] * 45) / float(self.gui_height)])
+        divider = make_axes_locatable(self.ax1f1)
+        self.ax2 = divider.new_horizontal(size="3%", pad=0.7)
+        self.fig1.add_axes(self.ax2)
         self.markerSize = (self.slider.GetValue())
         im = io.imread(self.index[self.iter])
         im_axis = self.ax1f1.imshow(im,self.colormap)
-        cbar = self.fig1.colorbar(im_axis, ax = self.ax1f1)
-        cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)))))
+        #im_axis = self.ax1f1.imshow(im, cmap=self.colormap, aspect="equal", interpolation='gaussian', vmin=0, vmax=255)
+        cbar = self.fig1.colorbar(im_axis, cax = self.ax2, orientation  = "vertical")
+        #cbar.set_ticks(range(12,np.max(im),int(np.floor(np.max(im)/len(self.bodyparts)))))
+        one_tick = int(np.floor(np.max(im) / len(self.bodyparts)))
+        one_tick = one_tick + 2
+        start_point = int(np.floor(one_tick / 2))
+        cbar.set_ticks(range(start_point, np.max(im), one_tick))
         cbar.set_ticklabels(self.bodyparts)
         img_name = Path(self.index[self.iter]).name #self.index[self.iter].split('/')[-1]
         self.ax1f1.set_title(str(str(self.iter)+"/"+str(len(self.index)-1) +" "+ img_name ))

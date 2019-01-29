@@ -158,6 +158,11 @@ def label_frames(config,Screens=1,scale_w=.8,scale_h=.9, winHack=1, img_scale=0.
     --------
 
     """
+
+    #Edited by KAIST Team
+    img_scale= 0.015
+    scale_w = 2.0
+    scale_h = 0.95
     startpath = os.getcwd()
     wd = Path(config).resolve().parents[0]
     os.chdir(str(wd))
