@@ -1,0 +1,482 @@
+2019-01-22 18:16:06 Config:
+{'all_joints': [[0],
+                [1],
+                [2],
+                [3],
+                [4],
+                [5],
+                [6],
+                [7],
+                [8],
+                [9],
+                [10],
+                [11],
+                [12]],
+ 'all_joints_names': ['L1',
+                      'L2',
+                      'L3',
+                      'L4',
+                      'R1',
+                      'R2',
+                      'R3',
+                      'R4',
+                      'Tether',
+                      'Nose',
+                      'LeftEar',
+                      'RightEar',
+                      'TailBase'],
+ 'batch_size': 1,
+ 'bottomheight': 400,
+ 'crop': True,
+ 'crop_pad': 0,
+ 'cropratio': 0.4,
+ 'dataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\LinearChamber2_KAIST80shuffle1.mat',
+ 'dataset_type': 'default',
+ 'display_iters': 1000,
+ 'fg_fraction': 0.25,
+ 'global_scale': 0.8,
+ 'init_weights': 'D:\\Users\\user\\Desktop\\LinearChamber-KAIST-2018-11-19\\dlc-models\\iteration-3\\LinearChamberNov19-trainset80shuffle1\\train\\snapshot-195000',
+ 'intermediate_supervision': False,
+ 'intermediate_supervision_layer': 12,
+ 'leftwidth': 400,
+ 'location_refinement': True,
+ 'locref_huber_loss': True,
+ 'locref_loss_weight': 0.05,
+ 'locref_stdev': 7.2801,
+ 'log_dir': 'log',
+ 'max_input_size': 1000,
+ 'mean_pixel': [123.68, 116.779, 103.939],
+ 'metadataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\Documentation_data-LinearChamber2_80shuffle1.pickle',
+ 'minsize': 100,
+ 'mirror': False,
+ 'multi_step': [[0.005, 10000],
+                [0.02, 430000],
+                [0.002, 730000],
+                [0.001, 1030000]],
+ 'net_type': 'resnet_101',
+ 'num_joints': 13,
+ 'optimizer': 'sgd',
+ 'pos_dist_thresh': 17,
+ 'project_path': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07',
+ 'regularize': False,
+ 'rightwidth': 400,
+ 'save_iters': 50000,
+ 'scale_jitter_lo': 0.5,
+ 'scale_jitter_up': 1.25,
+ 'scoremap_dir': 'test',
+ 'shuffle': True,
+ 'snapshot_prefix': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\train\\snapshot',
+ 'stride': 8.0,
+ 'topheight': 400,
+ 'use_gt_segm': False,
+ 'video': False,
+ 'video_batch': False,
+ 'weigh_negatives': False,
+ 'weigh_only_present_joints': False,
+ 'weigh_part_predictions': False,
+ 'weight_decay': 0.0001}
+2019-01-22 18:16:20 Restoring parameters from D:\Users\user\Desktop\LinearChamber-KAIST-2018-11-19\dlc-models\iteration-3\LinearChamberNov19-trainset80shuffle1\train\snapshot-195000
+2019-01-22 18:33:19 iteration: 5000 loss: 0.0260 lr: 0.001
+2019-01-22 18:33:21 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-5000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 18:45:47 iteration: 10000 loss: 0.0138 lr: 0.001
+2019-01-22 18:45:49 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-10000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 18:57:07 iteration: 15000 loss: 0.0117 lr: 0.001
+2019-01-22 18:57:09 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-15000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:07:39 iteration: 20000 loss: 0.0105 lr: 0.001
+2019-01-22 19:07:42 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-20000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:17:57 iteration: 25000 loss: 0.0098 lr: 0.001
+2019-01-22 19:17:59 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-25000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:27:55 iteration: 30000 loss: 0.0091 lr: 0.001
+2019-01-22 19:27:58 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-30000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:37:33 iteration: 35000 loss: 0.0086 lr: 0.001
+2019-01-22 19:37:35 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-35000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:47:07 iteration: 40000 loss: 0.0083 lr: 0.001
+2019-01-22 19:47:10 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-40000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 19:56:34 iteration: 45000 loss: 0.0079 lr: 0.001
+2019-01-22 19:56:36 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-45000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:05:53 iteration: 50000 loss: 0.0077 lr: 0.001
+2019-01-22 20:05:56 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-50000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:15:10 iteration: 55000 loss: 0.0073 lr: 0.001
+2019-01-22 20:15:12 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-55000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:24:17 iteration: 60000 loss: 0.0071 lr: 0.001
+2019-01-22 20:24:19 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-60000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:33:21 iteration: 65000 loss: 0.0068 lr: 0.001
+2019-01-22 20:33:24 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-65000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:42:18 iteration: 70000 loss: 0.0066 lr: 0.001
+2019-01-22 20:42:20 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-70000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 20:51:18 iteration: 75000 loss: 0.0066 lr: 0.001
+2019-01-22 20:51:20 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-75000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:00:08 iteration: 80000 loss: 0.0063 lr: 0.001
+2019-01-22 21:00:10 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-80000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:09:02 iteration: 85000 loss: 0.0062 lr: 0.001
+2019-01-22 21:09:05 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-85000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:17:55 iteration: 90000 loss: 0.0060 lr: 0.001
+2019-01-22 21:17:58 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-90000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:26:44 iteration: 95000 loss: 0.0059 lr: 0.001
+2019-01-22 21:26:46 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-95000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:35:32 iteration: 100000 loss: 0.0057 lr: 0.001
+2019-01-22 21:35:35 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-100000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:44:18 iteration: 105000 loss: 0.0056 lr: 0.001
+2019-01-22 21:44:21 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-105000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 21:52:59 iteration: 110000 loss: 0.0054 lr: 0.001
+2019-01-22 21:53:02 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-110000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:01:40 iteration: 115000 loss: 0.0054 lr: 0.001
+2019-01-22 22:01:43 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-115000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:10:25 iteration: 120000 loss: 0.0054 lr: 0.001
+2019-01-22 22:10:28 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-120000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:19:11 iteration: 125000 loss: 0.0052 lr: 0.001
+2019-01-22 22:19:14 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-125000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:27:55 iteration: 130000 loss: 0.0051 lr: 0.001
+2019-01-22 22:27:58 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-130000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:36:34 iteration: 135000 loss: 0.0051 lr: 0.001
+2019-01-22 22:36:37 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-135000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:45:19 iteration: 140000 loss: 0.0050 lr: 0.001
+2019-01-22 22:45:21 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-140000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 22:54:03 iteration: 145000 loss: 0.0049 lr: 0.001
+2019-01-22 22:54:06 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-145000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:02:44 iteration: 150000 loss: 0.0048 lr: 0.001
+2019-01-22 23:02:46 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-150000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:11:21 iteration: 155000 loss: 0.0048 lr: 0.001
+2019-01-22 23:11:24 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-155000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:19:59 iteration: 160000 loss: 0.0047 lr: 0.001
+2019-01-22 23:20:01 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-160000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:28:40 iteration: 165000 loss: 0.0047 lr: 0.001
+2019-01-22 23:28:42 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-165000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:37:16 iteration: 170000 loss: 0.0046 lr: 0.001
+2019-01-22 23:37:19 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-170000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:45:56 iteration: 175000 loss: 0.0044 lr: 0.001
+2019-01-22 23:45:59 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-175000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-22 23:54:35 iteration: 180000 loss: 0.0045 lr: 0.001
+2019-01-22 23:54:37 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-180000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:02:56 iteration: 185000 loss: 0.0046 lr: 0.001
+2019-01-23 00:02:58 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-185000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:11:34 iteration: 190000 loss: 0.0044 lr: 0.001
+2019-01-23 00:11:37 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-190000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:20:12 iteration: 195000 loss: 0.0043 lr: 0.001
+2019-01-23 00:20:14 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-195000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:28:51 iteration: 200000 loss: 0.0042 lr: 0.001
+2019-01-23 00:28:54 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-200000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:37:23 iteration: 205000 loss: 0.0043 lr: 0.001
+2019-01-23 00:37:26 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-205000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:45:59 iteration: 210000 loss: 0.0041 lr: 0.001
+2019-01-23 00:46:01 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-210000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 00:54:37 iteration: 215000 loss: 0.0041 lr: 0.001
+2019-01-23 00:54:39 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-215000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:03:14 iteration: 220000 loss: 0.0042 lr: 0.001
+2019-01-23 01:03:16 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-220000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:11:50 iteration: 225000 loss: 0.0041 lr: 0.001
+2019-01-23 01:11:52 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-225000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:20:27 iteration: 230000 loss: 0.0042 lr: 0.001
+2019-01-23 01:20:29 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-230000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:29:03 iteration: 235000 loss: 0.0040 lr: 0.001
+2019-01-23 01:29:05 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-235000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:37:38 iteration: 240000 loss: 0.0040 lr: 0.001
+2019-01-23 01:37:40 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-240000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:46:15 iteration: 245000 loss: 0.0040 lr: 0.001
+2019-01-23 01:46:18 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-245000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 01:54:50 iteration: 250000 loss: 0.0040 lr: 0.001
+2019-01-23 01:54:53 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-250000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:03:25 iteration: 255000 loss: 0.0039 lr: 0.001
+2019-01-23 02:03:27 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-255000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:12:01 iteration: 260000 loss: 0.0039 lr: 0.001
+2019-01-23 02:12:04 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-260000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:20:37 iteration: 265000 loss: 0.0039 lr: 0.001
+2019-01-23 02:20:39 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-265000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:29:12 iteration: 270000 loss: 0.0038 lr: 0.001
+2019-01-23 02:29:14 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-270000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:37:46 iteration: 275000 loss: 0.0038 lr: 0.001
+2019-01-23 02:37:48 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-275000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:46:19 iteration: 280000 loss: 0.0038 lr: 0.001
+2019-01-23 02:46:22 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-280000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 02:54:56 iteration: 285000 loss: 0.0037 lr: 0.001
+2019-01-23 02:54:58 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-285000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 03:03:29 iteration: 290000 loss: 0.0037 lr: 0.001
+2019-01-23 03:03:31 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-290000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 03:12:04 iteration: 295000 loss: 0.0037 lr: 0.001
+2019-01-23 03:12:07 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-295000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 03:20:40 iteration: 300000 loss: 0.0037 lr: 0.001
+2019-01-23 03:20:42 D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-300000 is not in all_model_checkpoint_paths. Manually adding it.
+2019-01-23 04:02:24 Config:
+{'all_joints': [[0],
+                [1],
+                [2],
+                [3],
+                [4],
+                [5],
+                [6],
+                [7],
+                [8],
+                [9],
+                [10],
+                [11],
+                [12]],
+ 'all_joints_names': ['L1',
+                      'L2',
+                      'L3',
+                      'L4',
+                      'R1',
+                      'R2',
+                      'R3',
+                      'R4',
+                      'Tether',
+                      'Nose',
+                      'LeftEar',
+                      'RightEar',
+                      'TailBase'],
+ 'batch_size': 1,
+ 'bottomheight': 400,
+ 'crop': True,
+ 'crop_pad': 0,
+ 'cropratio': 0.4,
+ 'dataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\LinearChamber2_KAIST80shuffle1.mat',
+ 'dataset_type': 'default',
+ 'display_iters': 5000,
+ 'fg_fraction': 0.25,
+ 'global_scale': 0.8,
+ 'init_weights': 'C:\\Users\\user\\Anaconda3\\envs\\DLC2_COPY\\lib\\site-packages\\deeplabcut\\Pose_Estimation_Tensorflow\\models\\pretrained\\resnet_v1_101.ckpt',
+ 'intermediate_supervision': True,
+ 'intermediate_supervision_layer': 12,
+ 'leftwidth': 400,
+ 'location_refinement': True,
+ 'locref_huber_loss': True,
+ 'locref_loss_weight': 0.05,
+ 'locref_stdev': 7.2801,
+ 'log_dir': 'log',
+ 'max_input_size': 1000,
+ 'mean_pixel': [123.68, 116.779, 103.939],
+ 'metadataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\Documentation_data-LinearChamber2_80shuffle1.pickle',
+ 'minsize': 100,
+ 'mirror': False,
+ 'multi_step': [[0.001, 300000]],
+ 'net_type': 'resnet_101',
+ 'num_joints': 13,
+ 'optimizer': 'sgd',
+ 'pos_dist_thresh': 17,
+ 'project_path': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07',
+ 'regularize': True,
+ 'rightwidth': 400,
+ 'save_iters': 5000,
+ 'scale_jitter_lo': 0.5,
+ 'scale_jitter_up': 1.25,
+ 'scoremap_dir': 'test',
+ 'shuffle': True,
+ 'snapshot_prefix': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\test\\snapshot',
+ 'stride': 8.0,
+ 'topheight': 400,
+ 'use_gt_segm': False,
+ 'video': False,
+ 'video_batch': False,
+ 'weigh_negatives': False,
+ 'weigh_only_present_joints': False,
+ 'weigh_part_predictions': False,
+ 'weight_decay': 0.001}
+2019-01-23 04:02:29 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-5000
+2019-01-23 04:03:06 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-10000
+2019-01-23 04:03:44 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-15000
+2019-01-23 04:04:23 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-20000
+2019-01-23 04:05:01 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-25000
+2019-01-23 04:05:39 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-30000
+2019-01-23 04:06:17 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-35000
+2019-01-23 04:06:56 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-40000
+2019-01-23 04:07:35 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-45000
+2019-01-23 04:08:14 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-50000
+2019-01-23 04:08:52 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-55000
+2019-01-23 04:09:30 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-60000
+2019-01-23 04:10:08 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-65000
+2019-01-23 04:10:47 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-70000
+2019-01-23 04:11:25 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-75000
+2019-01-23 04:12:04 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-80000
+2019-01-23 04:12:41 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-85000
+2019-01-23 04:13:19 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-90000
+2019-01-23 04:13:57 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-95000
+2019-01-23 04:14:36 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-100000
+2019-01-23 04:15:16 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-105000
+2019-01-23 04:15:55 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-110000
+2019-01-23 04:16:35 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-115000
+2019-01-23 04:17:14 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-120000
+2019-01-23 04:17:53 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-125000
+2019-01-23 04:18:33 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-130000
+2019-01-23 04:19:11 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-135000
+2019-01-23 04:19:52 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-140000
+2019-01-23 04:20:31 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-145000
+2019-01-23 04:21:09 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-150000
+2019-01-23 04:21:47 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-155000
+2019-01-23 04:22:27 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-160000
+2019-01-23 04:23:06 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-165000
+2019-01-23 04:23:45 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-170000
+2019-01-23 04:24:24 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-175000
+2019-01-23 04:25:04 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-180000
+2019-01-23 04:25:42 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-185000
+2019-01-23 04:26:21 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-190000
+2019-01-23 04:27:00 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-195000
+2019-01-23 04:27:39 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-200000
+2019-01-23 04:28:19 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-205000
+2019-01-23 04:28:57 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-210000
+2019-01-23 04:29:35 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-215000
+2019-01-23 04:30:14 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-220000
+2019-01-23 04:30:54 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-225000
+2019-01-23 04:31:33 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-230000
+2019-01-23 04:32:12 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-235000
+2019-01-23 04:32:50 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-240000
+2019-01-23 04:33:29 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-245000
+2019-01-23 04:34:08 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-250000
+2019-01-23 04:34:47 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-255000
+2019-01-23 04:35:26 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-260000
+2019-01-23 04:36:05 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-265000
+2019-01-23 04:36:43 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-270000
+2019-01-23 04:37:23 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-275000
+2019-01-23 04:38:02 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-280000
+2019-01-23 04:38:41 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-285000
+2019-01-23 04:39:20 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-290000
+2019-01-23 04:39:59 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-295000
+2019-01-23 04:40:37 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-300000
+2019-01-23 10:00:21 Config:
+{'all_joints': [[0],
+                [1],
+                [2],
+                [3],
+                [4],
+                [5],
+                [6],
+                [7],
+                [8],
+                [9],
+                [10],
+                [11],
+                [12]],
+ 'all_joints_names': ['L1',
+                      'L2',
+                      'L3',
+                      'L4',
+                      'R1',
+                      'R2',
+                      'R3',
+                      'R4',
+                      'Tether',
+                      'Nose',
+                      'LeftEar',
+                      'RightEar',
+                      'TailBase'],
+ 'batch_size': 1,
+ 'bottomheight': 400,
+ 'crop': True,
+ 'crop_pad': 0,
+ 'cropratio': 0.4,
+ 'dataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\LinearChamber2_KAIST80shuffle1.mat',
+ 'dataset_type': 'default',
+ 'display_iters': 5000,
+ 'fg_fraction': 0.25,
+ 'global_scale': 0.8,
+ 'init_weights': 'C:\\Users\\user\\Anaconda3\\envs\\DLC2_COPY\\lib\\site-packages\\deeplabcut\\Pose_Estimation_Tensorflow\\models\\pretrained\\resnet_v1_101.ckpt',
+ 'intermediate_supervision': True,
+ 'intermediate_supervision_layer': 12,
+ 'leftwidth': 400,
+ 'location_refinement': True,
+ 'locref_huber_loss': True,
+ 'locref_loss_weight': 0.05,
+ 'locref_stdev': 7.2801,
+ 'log_dir': 'log',
+ 'max_input_size': 1000,
+ 'mean_pixel': [123.68, 116.779, 103.939],
+ 'metadataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\Documentation_data-LinearChamber2_80shuffle1.pickle',
+ 'minsize': 100,
+ 'mirror': False,
+ 'multi_step': [[0.001, 300000]],
+ 'net_type': 'resnet_101',
+ 'num_joints': 13,
+ 'optimizer': 'sgd',
+ 'pos_dist_thresh': 17,
+ 'project_path': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07',
+ 'regularize': True,
+ 'rightwidth': 400,
+ 'save_iters': 5000,
+ 'scale_jitter_lo': 0.5,
+ 'scale_jitter_up': 1.25,
+ 'scoremap_dir': 'test',
+ 'shuffle': True,
+ 'snapshot_prefix': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\test\\snapshot',
+ 'stride': 8.0,
+ 'topheight': 400,
+ 'use_gt_segm': False,
+ 'video': False,
+ 'video_batch': False,
+ 'weigh_negatives': False,
+ 'weigh_only_present_joints': False,
+ 'weigh_part_predictions': False,
+ 'weight_decay': 0.001}
+2019-01-23 10:00:25 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-120000
+2019-01-23 10:01:07 Config:
+{'all_joints': [[0],
+                [1],
+                [2],
+                [3],
+                [4],
+                [5],
+                [6],
+                [7],
+                [8],
+                [9],
+                [10],
+                [11],
+                [12]],
+ 'all_joints_names': ['L1',
+                      'L2',
+                      'L3',
+                      'L4',
+                      'R1',
+                      'R2',
+                      'R3',
+                      'R4',
+                      'Tether',
+                      'Nose',
+                      'LeftEar',
+                      'RightEar',
+                      'TailBase'],
+ 'batch_size': 4,
+ 'bottomheight': 400,
+ 'crop': True,
+ 'crop_pad': 0,
+ 'cropratio': 0.4,
+ 'dataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\LinearChamber2_KAIST80shuffle1.mat',
+ 'dataset_type': 'default',
+ 'display_iters': 5000,
+ 'fg_fraction': 0.25,
+ 'global_scale': 0.8,
+ 'init_weights': 'C:\\Users\\user\\Anaconda3\\envs\\DLC2_COPY\\lib\\site-packages\\deeplabcut\\Pose_Estimation_Tensorflow\\models\\pretrained\\resnet_v1_101.ckpt',
+ 'intermediate_supervision': True,
+ 'intermediate_supervision_layer': 12,
+ 'leftwidth': 400,
+ 'location_refinement': True,
+ 'locref_huber_loss': True,
+ 'locref_loss_weight': 0.05,
+ 'locref_stdev': 7.2801,
+ 'log_dir': 'log',
+ 'max_input_size': 1000,
+ 'mean_pixel': [123.68, 116.779, 103.939],
+ 'metadataset': 'training-datasets\\iteration-3\\UnaugmentedDataSet_LinearChamber2Jan7\\Documentation_data-LinearChamber2_80shuffle1.pickle',
+ 'minsize': 100,
+ 'mirror': False,
+ 'multi_step': [[0.001, 300000]],
+ 'net_type': 'resnet_101',
+ 'num_joints': 13,
+ 'optimizer': 'sgd',
+ 'pos_dist_thresh': 17,
+ 'project_path': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07',
+ 'regularize': True,
+ 'rightwidth': 400,
+ 'save_iters': 5000,
+ 'scale_jitter_lo': 0.5,
+ 'scale_jitter_up': 1.25,
+ 'scoremap_dir': 'test',
+ 'shuffle': True,
+ 'snapshot_prefix': 'D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\test\\snapshot',
+ 'stride': 8.0,
+ 'topheight': 400,
+ 'use_gt_segm': False,
+ 'video': False,
+ 'video_batch': False,
+ 'weigh_negatives': False,
+ 'weigh_only_present_joints': False,
+ 'weigh_part_predictions': False,
+ 'weight_decay': 0.001}
+2019-01-23 10:01:12 Restoring parameters from D:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\dlc-models\iteration-3\LinearChamber2Jan7-trainset80shuffle1\train\snapshot-120000

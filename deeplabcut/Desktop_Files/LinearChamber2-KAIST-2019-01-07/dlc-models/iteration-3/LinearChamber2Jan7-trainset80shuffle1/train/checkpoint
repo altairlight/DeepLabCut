@@ -1,0 +1,2 @@
+model_checkpoint_path: "D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\train\\snapshot-300000"
+all_model_checkpoint_paths: "D:\\Users\\user\\Desktop\\LinearChamber2-KAIST-2019-01-07\\dlc-models\\iteration-3\\LinearChamber2Jan7-trainset80shuffle1\\train\\snapshot-300000"

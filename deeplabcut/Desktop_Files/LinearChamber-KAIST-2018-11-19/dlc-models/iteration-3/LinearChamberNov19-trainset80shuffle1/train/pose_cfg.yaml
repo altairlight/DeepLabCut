@@ -1,0 +1,38 @@
+all_joints:
+- [0]
+- [1]
+- [2]
+- [3]
+all_joints_names: [Snout, LeftEar, RightEar, TailBase]
+bottomheight: 400
+crop: true
+cropratio: 0.4
+dataset: training-datasets\iteration-3\UnaugmentedDataSet_LinearChamberNov19\LinearChamber_KAIST80shuffle1.mat
+display_iters: 1000
+global_scale: 0.8
+init_weights: C:\Users\user\Anaconda3\envs\DLC2_COPY\lib\site-packages\deeplabcut\Pose_Estimation_Tensorflow\models\pretrained\resnet_v1_101.ckpt
+intermediate_supervision: false
+intermediate_supervision_layer: 12
+leftwidth: 400
+location_refinement: true
+locref_huber_loss: true
+locref_loss_weight: 0.05
+locref_stdev: 7.2801
+max_input_size: 1000
+metadataset: training-datasets\iteration-3\UnaugmentedDataSet_LinearChamberNov19\Documentation_data-LinearChamber_80shuffle1.pickle
+minsize: 100
+mirror: false
+multi_step:
+- [0.005, 10000]
+- [0.02, 430000]
+- [0.002, 730000]
+- [0.001, 1030000]
+net_type: resnet_101
+num_joints: 4
+pos_dist_thresh: 17
+project_path: C:\Users\user\Desktop\LinearChamber-KAIST-2018-11-19
+rightwidth: 400
+save_iters: 50000
+scale_jitter_lo: 0.5
+scale_jitter_up: 1.25
+topheight: 400

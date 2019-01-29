@@ -1,0 +1,24 @@
+all_joints:
+- [0]
+- [1]
+- [2]
+- [3]
+- [4]
+- [5]
+- [6]
+- [7]
+- [8]
+- [9]
+- [10]
+- [11]
+- [12]
+all_joints_names: [L1, L2, L3, L4, R1, R2, R3, R4, Tether, Nose, LeftEar, RightEar,
+  TailBase]
+dataset: training-datasets\iteration-3\UnaugmentedDataSet_LinearChamber2Jan7\LinearChamber2_KAIST80shuffle1.mat
+global_scale: 0.8
+init_weights: C:\Users\user\Anaconda3\envs\DLC2_COPY\lib\site-packages\deeplabcut\Pose_Estimation_Tensorflow\models\pretrained\resnet_v1_101.ckpt
+location_refinement: true
+locref_stdev: 7.2801
+net_type: resnet_101
+num_joints: 13
+scoremap_dir: test

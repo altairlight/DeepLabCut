@@ -1,0 +1,124 @@
+Task: LinearChamber
+TrainingFraction:
+- 0.8
+alphavalue: 0.5
+batch_size: 4
+bodyparts:
+- Snout
+- LeftEar
+- RightEar
+- TailBase
+colormap: gist_rainbow
+corner2move2: !!python/tuple
+- 50
+- 50
+cropping: true
+date: Nov19
+dotsize: 8
+iteration: 3
+move2corner: true
+numframes2pick: 10
+pcutoff: 0.1
+project_path: C:\Users\user\Desktop\LinearChamber-KAIST-2018-11-19
+resnet: 101
+scorer: KAIST
+snapshotindex: all
+start: 0
+stop: 1
+video_sets:
+  C:\Users\user\Desktop\LinearChamber-KAIST-2018-11-19\videos\20180906_Trial1.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial1.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial10.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial11.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial12.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial13.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial14.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial15.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial2.mpg:
+    crop: 0, 704, 0, 480
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial3.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial4.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial5.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial6.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial7.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial8.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial9.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial1.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial10.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial11.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial12.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial13.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial14.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial15.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial2.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial3.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial4.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial5.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial6.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial7.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial8.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180910\20180910_Trial9.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial1.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial10.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial11.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial12.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial13.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial14.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial15.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial2.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial3.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial4.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial5.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial6.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial7.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial8.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180919\20180919_Trial9.mpg:
+    crop: 0, 704, 50, 270
+x1: 0
+x2: 704
+y1: 50
+y2: 270
