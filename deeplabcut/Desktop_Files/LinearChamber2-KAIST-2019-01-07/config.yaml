@@ -1,8 +1,21 @@
+# Project definitions (do not edit)
 Task: LinearChamber2
-TrainingFraction:
-- 0.8
-alphavalue: 0.5
-batch_size: 4
+scorer: KAIST
+date: Jan7
+
+# Project path (change when moving around)
+project_path: C:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  C:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\videos\20180906_Trial2.mpg:
+    crop: 0, 704, 50, 270
+  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial2.mpg:
+    crop: 0, 640, 50, 270
+  C:\Users\user\Desktop\Video_files_other\20171229(coh1)_WireNet\20171229(coh1)_Trial5.mpg:
+    crop: 0, 640, 50, 270
+  C:\Users\user\Desktop\Video_files_other\20180205(coh1)_RedHat\20180205(coh1)_Trial1.mpg:
+    crop: 0, 640, 50, 270
 bodyparts:
 - L1
 - L2
@@ -17,33 +30,34 @@ bodyparts:
 - LeftEar
 - RightEar
 - TailBase
-colormap: jet
-corner2move2: !!python/tuple
-- 50
-- 50
-cropping: true
-date: Jan7
-dotsize: 5
-iteration: 3
-move2corner: true
-numframes2pick: 40
-pcutoff: 0.1
-project_path: C:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07
-resnet: 101
-scorer: KAIST
-snapshotindex: 23
 start: 0
 stop: 1
-video_sets:
-  C:\Users\user\Desktop\LinearChamber2-KAIST-2019-01-07\videos\20180906_Trial2.mpg:
-    crop: 0, 704, 50, 270
-  C:\Users\user\Desktop\Video_files_Deeplabcut\LinearChamber\20180906\20180906_Trial2.mpg:
-    crop: 0, 640, 50, 270
-  C:\Users\user\Desktop\Video_files_other\20171229(coh1)_WireNet\20171229(coh1)_Trial5.mpg:
-    crop: 0, 640, 50, 270
-  C:\Users\user\Desktop\Video_files_other\20180205(coh1)_RedHat\20180205(coh1)_Trial1.mpg:
-    crop: 0, 640, 50, 270
+numframes2pick: 40
+
+# Plotting configuration
+pcutoff: 0.1
+dotsize: 5
+alphavalue: 0.5
+colormap: jet
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.8
+iteration: 3
+resnet: 101
+snapshotindex: 23
+batch_size: 4
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: true
+#if cropping is true for analysis, then set the values here:
 x1: 0
 x2: 640
 y1: 50
 y2: 270
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2: 
+- 50
+- 50
+move2corner: true

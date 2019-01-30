@@ -9,7 +9,7 @@ bodyparts:
 - RightEar
 - TailBase
 colormap: gist_rainbow
-corner2move2: !!python/tuple
+corner2move2: 
 - 50
 - 50
 cropping: true

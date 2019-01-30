@@ -187,7 +187,8 @@ deeplabcut.analyze_videos(path_config_file,videofile_path, videotype='.mpg', gpu
 여기서 처음이라면 당연히 iteration이 0이겠지만, Training Fraction등을 바꾸었다거나, refine_labels를 하고나서 merge dataset을 했다면, iteration이 올라가있을 겁니다(1,2,3,...) 현재 iteration이 3인데 영상은 2번째 iteration으로 분석하고 싶다면 create_new_project할 때 만들어진 폴더로 가셔서 config.yaml에서 iteration을 2로 바꿔주시면 됩니다. 참고호 iteration을 all로 납두시면, -1로 바뀌어서 맨 마지막 iteration을 분석하게 됩니다.
 분석은 영상 하나에 5분정도 걸립니다. 결과로는 csv파일(save_as_csv를 true로 했다면)과 h5파일이 나올겁니다.
 *분석도 트레이닝과 마찬가지로 CUDNN의 lock을 얻어서 사용하므로 한번에 여러개를 돌릴 수 없습니다(반면 create labeled video는 cmd 창을 여러개 띄우고 ipynb파일을 각각 열어서 여러개를 한번에 돌릴 수 있습니다)
-
+*" ImportError: HDFStore requires PyTables, 'DLL load failed: ’ problem importing."에러가 날 경우 DLC2환경으로 activate한 뒤 conda install -c conda-forge pytables하면 된다.
+*ConstructorError: could not determine a constructor for the tag ‘!!python/tuple’ in “/content/drive/My Drive/0_DeepLabCut/DeepLabCut 2.0/Social_Interaction-Joao-2019-01-16/config.yaml”, line 12, column 15 이 에러가 날경우에는 "!!python/tuple" 요 부분을 지워주면 된다.
 13.deeplabcut.create_labeled_video(path_config_file,videofile_path, videotype='mpg', save_frames = True, delete=False, displayedbodyparts='all')를 통해 레이블된 영상을 만듭니다. displayedbodyparts=['Nose, TailBase']와 같이 보여지는 bodyparts를 고를 수도 있습니다. 그리고 save_frames = True, delete=False로 하면 프레임을 저장하고 지우지 않는데, 이는 메모리를 상당히 많이 잡아먹지만 중간에 어쩌다 동작이 중지될 경우(정전, 메모리 초과(생각보다 상당히 자주일어납니다!), 블루 스크린 등등...) 중간부터 다시 시작할 수 있게 해주며 프레임을 저장하면 나중에 다시 확인도 가능해지게 됩니다. 그래서 가급적이면 하는게 좋습니다.
 이 때 조심해야 할 것이 레이블을 저장하는 temp파일이 이미있을경우 프레임을 만들지 않는데, iteration이 달라도 이 폴더의 이름은 같습니다(예:temp-20180906_Trial2) 그래서, 이럴 경우 temp파일을 다른곳으로 치워놓던가 삭제하고 실행시키면 됩니다. 그리고 레이블된 영상을 만드는 것은 하나에 30분정도 걸립니다.
 
