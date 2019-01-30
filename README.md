@@ -1,6 +1,10 @@
 # Deeplabcut_KAIST
 Changed DeepLabCut for Synaptic Brain Dysfunctions Lab in KAIST, South Korea.
 
+![Alt Text](https://github.com/altairlight/DeepLabCut/blob/master/deeplabcut/Desktop_Files/gifs/Empty%20%26%20Empty.gif)
+![Alt Text](https://github.com/altairlight/DeepLabCut/blob/master/deeplabcut/Desktop_Files/gifs/Object%20%26%20Mouse.gif)
+![Alt Text](https://github.com/altairlight/DeepLabCut/blob/master/deeplabcut/Desktop_Files/gifs/RedHat.gif)
+
 Forked from commit https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8 and some of it's codes have been fixed. 
 
 You can use this code by 3 steps.
