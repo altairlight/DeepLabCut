@@ -1,22 +1,24 @@
 1.현재 컴퓨터 드라이브들
 1) C드라이브(SSD 1TB): 현재 윈도우즈 깔려있음. 이걸로 부팅이 시작됨. 파일들을 다 옮겨놓았고 path(환경 변수)설정도 꽤 많이 해놓았지만 안되어 있는게 있을 수도 있음.
 2) D드라이브(SSD 250GB): 2019년 1월 22일 포맷하기전 부팅하던 드라이브(원래 C드라이브)
-현재 포맷해놓고 아나콘다 설치할때 아나콘다 파일들이 날라갈까봐 아나콘다 백업파일만들어둠(1/28)
-완전 포맷 완료(1/29)
+완전 포맷 완료(1/29), C드라이브의 디스크 백업이미지를 저장해둠(즉, Macrium Reflect 프로그램을 통해 1/30의 C드라이브를 복구할 수 있음)
 3) E드라이브(HDD 3TB): 비디오 파일들/훈련파일들 백업하던 곳. 현재는 포맷해둠(1/28)
 4) F드라이브(HDD 3TB): CA Imaging 실험 드라이브(경덕이형 실험)
 
 2.C:/Program Files에 깔려 있는 것들
+Macrium Reflect
+컴퓨터 백업/복원해주는 프로그램. 디스크 카피를 할 때 반대로 카피하지 않도록 조심할것(!!!!!)
+1/30의 C드라이브 이미지를 D드라이브로 가져다놓았습니다.
 7-Zip
-대상 폴더에 대한 파일 이름이 너무 깁니다. 파일 이름을 줄여서 다시 시도하거나 경로 이름이 짧은 위치를 사용해 보십시오.
+"대상 폴더에 대한 파일 이름이 너무 깁니다. 파일 이름을 줄여서 다시 시도하거나 경로 이름이 짧은 위치를 사용해 보십시오."
 위 에러가 뜰경우 이프로그램으로 옮겨보길 바람(복사할꺼면 복사, 이동할꺼면 이동버튼! 복사할껀데 이동버튼 누르면 다시 복사해야한다ㅠㅠ)
 V3 Lite
 CCleaner(개인정보 삭제/메모리 클리어)
-CMake(Deeplabcut에 필요했던 것 같은데 어떤 스템에서 필요했는지 까먹었다.. 현재 path 설정이 사라졌으므로 나중에 추가해줘야 할 수도 있음. CMake 관련 에러가 났는데 해결책을 모르겠다면 연락바람)
-Git, Git LFS(큰 파일을 Git remote server로 올릴때 쓰게됨. 사용할 때 주의할것들의 3번을 참고)
+CMake(Deeplabcut에 필요했던 것 같은데 어떤 스텝에서 필요했는지 까먹었다.. 현재 path 설정이 사라졌으므로 나중에 추가해줘야 할 수도 있음. CMake 관련 에러가 났는데 해결책을 모르겠다면 연락바람)
+Git, Git LFS(Git LFS는 큰 파일을 Git remote server로 올릴때 쓰게됨. 가급적이면 100MB이상 파일들을 안올리는게 좋고 써야하는 경우라면 사용할 때 주의할것들의 3번을 참고)
 Internet Explorer
 Java(참고로 Java 설치시 Java 폴더를 삭제하고 깔지 않으면 최신버전으로 안깔리고, 다른 프로그램들이 어쩌다 작동을 안할 수도 있습니다)
-JetBrains(Pycharm 실행파일들이 있다. Pycharm은 python 파일들을 편집하거나 실행할 수 있는 프로그램인데 편집할 때 혹시 수정이 안되는 경우가 있다면 pycharm을 끄고 관리자 권한으로 다시 pycharm을 켜서 해보길 바랍니다... 실행을 하고 싶다면 그 전에 configuration을 해주어야 하는데 다음 과정을 따르면 된다.)
+JetBrains(Pycharm 실행파일들이 있다. Pycharm은 python 파일들을 편집하거나 실행할 수 있는 프로그램인데 편집할 때 혹시 수정이 안되는 경우가 있다면 pycharm을 끄고 관리자 권한으로 다시 pycharm을 켜서 해보길 바랍니다... 실행을 하고 싶다면 그 전에 configuration을 해주어야 하는데 다음 과정을 따르면 됩니다)
 1)File>>Settings>>Project Interpreter로 들어감
 2-1)Deeplabcut을 돌리기 위한 거라면 오른쪽 톱니바퀴 버튼을 누른뒤 add local을 누르고(랩컴은 이미 해두었으므로 Project Interpreter를 찾아보면 있을 것임) conda environment로 가서 Exisiting environment를 클릭한 후 C:\users\user\Anaconda3\envs\DLC2\python.exe를 찾은 뒤 ok누르면 된다. 만약 패키지가 몇개밖에 없다면 오른쪽에 초록색으로된 동그란 Use Conda Package Manager버튼을 누르면 된다. 버튼을 누를 수 없다면 anaconda가 제대로 안깔렸다는 것이므로 anaconda를 다시 깔고 확인해보면 될 것이다.
 2-2)그냥 파이썬 파일을 실행시키기 위한 것이라면 project interpreter로 컴퓨터에 깔아둔 python(c:\users\user\Anaconda3\python.exe)을 쓰면 된다. 대부분의 라이브러리는 오른쪽 +버튼을 누르고 원하는 것을 찾아서 다운받을 수 있다. 거기에 없는 라이브러리를 다룰 정도의 실력이라면 그런 라이브러리들은 어떻게 다운받아야 될지 아실거라 생각됩니다ㅎㅎ
@@ -29,18 +31,18 @@ Registry Workshop(레지스트리를 윈도우즈 내장 프로그램인 regedit
 Sublime Text 3(가볍고 쓸만한 파일 편집기2. Notepad++에 너무 많이 파일들을 띄우기 싫을 때 이걸로 주로 열었다)
  
 3.C:/Program Files (x86)에 깔려 있는 것들
-Dev-Cpp(C++ 편집 프로그램, c++ 11까지 돌아가며 그 이상의 버전은 windows visual studio에서 몇십기가의 c++ 관련된 라이브러리들을 죄다 깔아야 됨. 근데 지금은 1TB로 옮겼으니 필요하다면 깔아도 괜찮을 듯)
+Dev-Cpp(C++ 편집 프로그램, c++11까지 돌아가며 그 이상의 버전(C++14, C++17등)은 windows visual studio에서 몇십기가의 c++ 관련된 라이브러리들을 죄다 깔아야 됨. 근데 지금은 1TB로 옮겼으니 필요하다면 깔아도 괜찮을 듯)
 ESTsoft(알송/알집)
 Google(크롬 브라우저)
 GRETECH(곰플레이어)
 Hnc(한컴 오피스, 안깔려있음! 대신 polaris office로 문서를 현재 열고있으며 불편하다면 깔기 바랍니다)
 Internet Explorer
-IObit(IObit unlocker. 파일을 수정하기 위한 권한을 강제로 가져올 수 있음. 물론 시스템파일에 그런짓을 햇다가는 블루스크린을 볼 수 있다)
+IObit(IObit unlocker. 파일을 수정하기 위한 권한을 강제로 가져올 수 있음. 물론 시스템 파일에 그런 짓을 햇다가는 블루스크린을 볼 수 있다)
 Kakao(카카오톡)
 Microsoft Visual Studio(아무런 라이브러리 없이 현재 쌩 비주얼 스튜디오만 깔려있음)
 Polaris Office
 Samsung(SSD간 파일 복사를 매우 빠르게 할 수 있는 Samsung Data Migration과 SSD들의 펌웨어 등을 관리할 수 있는 Samsung Magician이 깔려있음)
-Teamviewer(원격지원)
+Teamviewer(원격 지원)
 
 4.그외 파일들
 C:\MyRegBack

@@ -1,4 +1,4 @@
-# deeplabcut_kaist
+# Deeplabcut_KAIST
 Changed DeepLabCut for Synaptic Brain Dysfunctions Lab in KAIST, South Korea.
 
 Forked from commit https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8 and some of it's codes have been fixed. 

@@ -15,10 +15,10 @@
 3.cudnn 7.4.1 설치(https://developer.nvidia.com/cudnn)
 -설치방법:https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#prerequisites-windows
 -꼭 7.4.1이 아니더라도 CUDA 9.0과 호환되면 됩니다.
-4.python 3.6.7 설치
+4.python 3.6.7 설치(1/30, 3.6.8도 됨)
 5.anaconda 설치(Just to me, Path에 추가)
 6.환경변수에 C:\Users\user\Anaconda3\Scripts 추가
-7.conda python 버전 3.6.7로 변경(conda install python=3.6.7)
+7.conda python 버전 3.6.7로 변경(conda install python=3.6.7, 위에서 3.6.7이 아니라 다른 버전으로 했다면 그 버전으로)
 -경우에 따라 solving environment가 몇십분 걸릴 수도 있음
 -다 끝나면 done하고 깜빡거리는데 그냥 꺼도됨
 8.conda create -n DLC2 python=3.6
@@ -35,7 +35,7 @@ deeplabcut 2.0.0.dev5 has requirement wheel==0.31.1, but you'll have wheel 0.32.
 import tensorflow as tf
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 14.DeepLabCut을 바탕화면에 다운로드 (https://github.com/AlexEMG/DeepLabCut)
--사실 필요한건 ipynb파일들 뿐입니다(바탕화면에 까는건 껍데기?입니다. 실제 알맹이는 C:\Users\user\Anaconda3\envs\DLC2\Lib\site-packages\deeplabcut 여기에 있을 겁니다)
+-사실 필요한건 ipynb파일들 뿐입니다(바탕화면에 까는건 껍데기?입니다. 실제 알맹이는 C:\Users\user\Anaconda3\envs\DLC2\Lib\site-packages\deeplabcut 여기에 이미 있을 겁니다)
 그래서 바탕화면에 projects 폴더를 만든 뒤 거기에 필요한 ipynb파일만 집어넣고 나머지 파일들은 버리면 됩니다. 처음 시작하시는 거라면 examples에 있는 Demo_yourowndata.ipynb파일을 열면 될 겁니다.
 15.conda install nb_conda_kernels(activate 안한상태로)
 16.conda install nb_conda(activate 안한상태로)
@@ -60,9 +60,7 @@ jupyter notebook
 -사실 다시 다운로드 할 필요는 없습니다. 하지만 업데이트를 잘 보고 함수 사용법이 달라졌을 경우 잘 반영해주는 것이 좋습니다(모르겠으면 다시 다운로드 받아서 그 안에 있는 Demo_yourowndata.ipynb파일을 보고 함수를 어떻게 쓰는지 확인해보면 되겠죠?ㅎㅎ 예를 들어 함수에 넣는 parameter의 개수가 달라진다거나, 새로운 parameter가 등장한다거나, 새로운 함수가 추가될 수도 있습니다)
 3.18번부터 다시 시작
 -ImportError: cannot import name 'generator_to_async_generator'가 나면서 커넬 시작이 안될 경우 지울 파일이 없다는 노란색 글씨가 뜰때까지 pip uninstall -y ipython prompt_toolkit을 한 후 pip install ipython prompt_toolkit를 하면 됨.
-*하지만 제가 GUI 수정, 버그 수정, 추가 기능(Labeling Restart 등등)을 위해 이미 코드를 많이 건드려놓았으므로, 업데이트가 정말 critical한게 아니라면 안하시는 것이 좋습니다.
-업데이트를 해야한다면, DLC2(C:\Users\user\Anaconda3\envs\DLC2)에 있는 코드를 다른 곳으로 옮겨놓은 뒤 업데이트를 하고, 제 코드와 잘 merging하시길 부탁드립니다.
-경험담으로 업데이트를 했다가 안돌아가는 경우도 많습니다(... 딥랩컷 팀이 이 컴퓨터와 똑같은 환경에서 개발하는 것이 아니기 때문에 그런 것 같습니다. 그래서 항상 백업을 잘 해두세요!)
+*하지만 제가 GUI 수정, 버그 수정, 추가 기능(Labeling Restart 등등)을 위해 이미 코드를 많이 건드려놓았으므로, 업데이트가 정말 critical한게 아니라면 안하시는 것이 좋습니다. 업데이트를 해야한다면, DLC2(C:\Users\user\Anaconda3\envs\DLC2)에 있는 코드를 다른 곳으로 옮겨놓은 뒤 업데이트를 하고, 제 코드와 잘 merging하시길 부탁드립니다. 경험담으로 업데이트를 했다가 안돌아가는 경우도 많습니다(... 딥랩컷 팀이 이 컴퓨터와 똑같은 환경에서 개발하는 것이 아니기 때문에 그런 것 같습니다. 그래서 항상 백업을 잘 해두세요!)
 *마지막으로 Merging을 시작한 딥랩컷 버전: https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8(1/29)
 
 물어볼 수 있는 곳/도움을 받을 수 있는 곳
