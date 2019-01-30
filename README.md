@@ -25,6 +25,6 @@ You can use this code by 3 steps.
     
     So, if you need the files and you can prove you are related to our Synaptic Brain Dysfunctions Lab in KAIST, you could get the data from me(altairlight@kaist.ac.kr) or from Ms.WooHyeon Kim.
 
-3. Now, you can follow my manual in Desktop_Files/Deeplabcut Guide and enjoy your projects!
+3. Now, you can follow my manual in deeplabcut/Desktop_Files/Deeplabcut Guide and enjoy your projects!
 
 Also please contact to altairlight@kaist.ac.kr if you got stuck on some problems. Thanks!
