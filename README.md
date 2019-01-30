@@ -23,7 +23,7 @@ You can use this code by 3 steps.
     
     But you know, I'm sorry that I cannot share full project folders(2, 3) and video files(5, 6) through github website(because of copyright issues and problem with size of this git repo) 
     
-    So, if you need the files and you can prove you are related to our Synaptic Brain Dysfunctions Lab in KAIST, you could get the data from me(altairlight@kaist.ac.kr) or from Ms.WooHyeon Kim.
+    So, if you need the files and you can prove you are related to our Synaptic Brain Dysfunctions Lab in KAIST, you could get the data from me(altairlight@kaist.ac.kr) or from Ms.WooHyun Kim.
 
 3. Now, you can follow my manual in deeplabcut/Desktop_Files/Deeplabcut Guide and enjoy your projects!
 
