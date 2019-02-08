@@ -308,8 +308,8 @@ class MainFrame(wx.Frame):
           start_point = int(np.floor(one_tick / 2))
           cbar.set_ticks(range(start_point, np.max(im), one_tick))
           cbar.set_ticklabels(self.bodyparts)
-          self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate",pos=(self.gui_width*.83, self.gui_height*.1), choices=self.bodyparts, majorDimension =1,style=wx.RA_SPECIFY_COLS,validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
-          self.option = self.rdb.Bind(wx.EVT_RADIOBOX,self.onRDB)
+          #self.rdb = wx.RadioBox(self, id=1, label="Select a body part to annotate",pos=(self.gui_width*.83, self.gui_height*.1), choices=self.bodyparts, majorDimension =1,style=wx.RA_SPECIFY_COLS,validator=wx.DefaultValidator, name=wx.RadioBoxNameStr)
+          #self.option = self.rdb.Bind(wx.EVT_RADIOBOX,self.onRDB)
 
 
         self.cidClick = self.canvas.mpl_connect('button_press_event', self.onClick)

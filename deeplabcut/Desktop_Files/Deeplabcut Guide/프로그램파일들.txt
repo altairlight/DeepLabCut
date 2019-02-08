@@ -26,7 +26,7 @@ JetBrains(Pycharm 실행파일들이 있다. Pycharm은 python 파일들을 편�
 Microsoft Office(백업 이후 안깔려있음! 대신 polaris office로 문서를 현재 열고있으며 불편하다면 깔기 바랍니다)
 Notepad++(가볍고 쓸만한 파일 편집기)
 NVIDIA Corporation(그래픽 드라이버 정보가 들어있는 폴더)
-NVIDIA GPU Computing Toolkit(CUDA랑 CUDNN가 있는 폴더)
+NVIDIA GPU Computing Toolkit(CUDA랑 CUDNN이 있는 폴더)
 Registry Workshop(레지스트리를 윈도우즈 내장 프로그램인 regedit보다 훨씬 쉽게 편집할 수 있게 해주는 프로그램. 아무리 100% 안 고장날거라 자신을 해도 쓰기 전에 항상 레지스트리 백업과 윈도우즈 복원 시점 설정을 하기바람. 강력한 프로그램인만큼 조심스럽게 다루어야함)
 Sublime Text 3(가볍고 쓸만한 파일 편집기2. Notepad++에 너무 많이 파일들을 띄우기 싫을 때 이걸로 주로 열었다)
  
