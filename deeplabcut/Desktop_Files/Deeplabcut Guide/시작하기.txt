@@ -1,75 +1,75 @@
-*¸í·É¾î´Â ¸ðµÎ cmd¸¦ °ü¸®ÀÚ¸ðµå·Î ÄÑ¼­ ÇØ¾ßÇÔ
-*¼ø¼­¸¦ ÁöÅ°°í, ¼³Ä¡ÇÏ¸é¼­ ´Ù¸¥°Å ¼³Ä¡¾ÈÇÏ´Â°Ô ÁÁÀ½
-*¸ðµç pip ¸í·É¾î´Â DLC2 È¯°æÀ» activateÇÑ ÀÌÈÄ¿¡ ÇØ¾ßÇÔ
-*ÃÖ¼Ò50GÁ¤µµ ¿©À¯°ø°£ÀÌ ÀÖ´Â SSD¿¡ ±î¼Å¾ß ÇÏ°í, ±×·¡ÇÈÄ«µå GTX 1080ÀÌ»óÀ» »ç¿ëÇÏ½Ã´Â°Ô ÁÁ½À´Ï´Ù.
-*¹öÀüÀÌ Åé´Ï¹ÙÄûÃ³·³ ¸Â¹°·Á ÀÖ±â ¶§¹®¿¡ ¸Ú´ë·Î ÃÖ½Å¹öÀü ±î½Ã¸é Ã³À½ºÎÅÍ ´Ù½Ã ´Ù ±î¼Å¾ßÇÏ½Ç ¼öµµ ÀÖ½À´Ï´Ù(¿¹: cudnnÀ» ±ñ ´ÙÀ½ cuda¸¦ ±ò¸é cudnnÀÌ ³¯¶ó°©´Ï´Ù¤Ð¤Ð)
-*DLC2¿¡¼­ DLC2_copy·Î È¯°æÀ» ¿Å°å½À´Ï´Ù. »õ·Î ¼³Ä¡ÇÏ´Â °ÍÀÌ¶ó¸é ±×´ë·Î DLC2·Î ÇÏ½Ã°í ¹öÀüÀÌ ¾÷µ¥ÀÌÆ® µÉ ¶§ DLC2_copy È¯°æÀ¸·Î ÇØÁÖ½Ã±æ ºÎÅ¹µå¸³´Ï´Ù.
-*DLC2_copy È¯°æÀ» »èÁ¦ÇÏ°í DLC2·Î mergingÇÔ(1/29)
-*windowsÈ¯°æ ±âÁØÀÔ´Ï´Ù(linux¸¦ ¾²½Ã´Â ºÐÀÌ¶ó¸é ¾Æ¸¶ ¾î´À ºÎºÐÀ» ´Ù¸£°Ô ÇÏ¼Å¾ßÇÒ Áö ¾Æ½Ç °Í °°³×¿ä¤¾¤¾ activate ´ë½Å¿¡ source activate¸¦ ÇÑ´Ù´ø°¡ µîµî...) 
-½ÃÀÛÇÏ±â
-1.±×·¡ÇÈ µå¶óÀÌ¹ö °¡Àå ÃÖ½ÅÀ¸·Î ¼³Ä¡(nvidiaÀÇ °æ¿ì Nvidia GeForce Experiment ±ò¸é ¾Ë¾Æ¼­ ¾÷µ¥ÀÌÆ® Ã£¾ÆÁÜ)
-2.CUDA Toolkit 9.0À¸·Î ¼³Ä¡(https://developer.nvidia.com/cuda-90-download-archive)
--base installerºÎÅÍ ¼³Ä¡ÇÏ°í ÆÐÄ¡µé ±ò¸éµÊ.
--patch1ÀÌ ¼³Ä¡ ÇÁ·Î±×·¥À» ¾È¶ç¿öÁÖ´øµ¥ ±×³É ¹«½ÃÇßÀ½.
--Áß°£¿¡ Visual Studio¸¦ ¸ÕÀú ±ò¾Æ¾ß Full functionÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù°í ÇÏ´Âµ¥ ¿©ÅÂ±îÁö ¹«½ÃÇÏ°í Àß ½è¾úÀ½(... ±×·¡µµ È¤½Ã ¸ô¶ó¼­ Áö±ÝÀº ±ò¾Æµ×¾î¿ä!¤¾¤¾)
-3.cudnn 7.4.1 ¼³Ä¡(https://developer.nvidia.com/cudnn)
--¼³Ä¡¹æ¹ý:https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#prerequisites-windows
--²À 7.4.1ÀÌ ¾Æ´Ï´õ¶óµµ CUDA 9.0°ú È£È¯µÇ¸é µË´Ï´Ù.
-4.python 3.6.7 ¼³Ä¡(1/30, 3.6.8µµ µÊ)
-5.anaconda ¼³Ä¡(Just to me, Path¿¡ Ãß°¡)
-6.È¯°æº¯¼ö¿¡ C:\Users\user\Anaconda3\Scripts Ãß°¡
-7.conda python ¹öÀü 3.6.7·Î º¯°æ(conda install python=3.6.7, À§¿¡¼­ 3.6.7ÀÌ ¾Æ´Ï¶ó ´Ù¸¥ ¹öÀüÀ¸·Î Çß´Ù¸é ±× ¹öÀüÀ¸·Î)
--°æ¿ì¿¡ µû¶ó solving environment°¡ ¸î½ÊºÐ °É¸± ¼öµµ ÀÖÀ½
--´Ù ³¡³ª¸é doneÇÏ°í ±ôºý°Å¸®´Âµ¥ ±×³É ²¨µµµÊ
+*ëª…ë ¹ì–´ëŠ” ëª¨ë‘ cmdë¥¼ ê´€ë¦¬ìžëª¨ë“œë¡œ ì¼œì„œ í•´ì•¼í•¨
+*ìˆœì„œë¥¼ ì§€í‚¤ê³ (ì˜ˆ: cudnnì„ ê¹ ë‹¤ìŒ cudaë¥¼ ê¹”ë©´ cudnnì´ ë‚ ë¼ê°‘ë‹ˆë‹¤ã… ã… ), ì„¤ì¹˜í•˜ë©´ì„œ ë‹¤ë¥¸ê±° ì„¤ì¹˜ì•ˆí•˜ëŠ”ê²Œ ì¢‹ìŒ
+*ëª¨ë“  pip ëª…ë ¹ì–´ëŠ” DLC2 í™˜ê²½ì„ activateí•œ ì´í›„ì— í•´ì•¼í•¨
+*ìµœì†Œ50Gì •ë„ ì—¬ìœ ê³µê°„ì´ ìžˆëŠ” SSDì— ê¹Œì…”ì•¼ í•˜ê³ , ê·¸ëž˜í”½ì¹´ë“œ GTX 1080ì´ìƒì„ ì‚¬ìš©í•˜ì‹œëŠ”ê²Œ ì¢‹ìŠµë‹ˆë‹¤.
+*ë²„ì „ì´ í†±ë‹ˆë°”í€´ì²˜ëŸ¼ ë§žë¬¼ë ¤ ìžˆê¸° ë•Œë¬¸ì— ë©‹ëŒ€ë¡œ ìµœì‹ ë²„ì „ ê¹Œì‹œë©´ ì²˜ìŒë¶€í„° ë‹¤ì‹œ ë‹¤ ê¹Œì…”ì•¼í•˜ì‹¤ ìˆ˜ë„ ìžˆìŠµë‹ˆë‹¤
+*DLC2ì—ì„œ DLC2_copyë¡œ í™˜ê²½ì„ ì˜®ê²¼ìŠµë‹ˆë‹¤. ìƒˆë¡œ ì„¤ì¹˜í•˜ëŠ” ê²ƒì´ë¼ë©´ ê·¸ëŒ€ë¡œ DLC2ë¡œ í•˜ì‹œê³  ë²„ì „ì´ ì—…ë°ì´íŠ¸ ë  ë•Œ DLC2_copy í™˜ê²½ìœ¼ë¡œ í•´ì£¼ì‹œê¸¸ ë¶€íƒë“œë¦½ë‹ˆë‹¤.
+*DLC2_copy í™˜ê²½ì„ ì‚­ì œí•˜ê³  DLC2ë¡œ mergingí•¨(1/29)
+*windowsí™˜ê²½ ê¸°ì¤€ìž…ë‹ˆë‹¤(linuxë¥¼ ì“°ì‹œëŠ” ë¶„ì´ë¼ë©´ ì•„ë§ˆ ì–´ëŠ ë¶€ë¶„ì„ ë‹¤ë¥´ê²Œ í•˜ì…”ì•¼í•  ì§€ ì•„ì‹¤ ê²ƒ ê°™ë„¤ìš”ã…Žã…Ž activate ëŒ€ì‹ ì— source activateë¥¼ í•œë‹¤ë˜ê°€ ë“±ë“±...) 
+ì‹œìž‘í•˜ê¸°
+1.ê·¸ëž˜í”½ ë“œë¼ì´ë²„ ê°€ìž¥ ìµœì‹ ìœ¼ë¡œ ì„¤ì¹˜(nvidiaì˜ ê²½ìš° Nvidia GeForce Experiment ê¹”ë©´ ì•Œì•„ì„œ ì—…ë°ì´íŠ¸ ì°¾ì•„ì¤Œ)
+2.CUDA Toolkit 9.0ìœ¼ë¡œ ì„¤ì¹˜(https://developer.nvidia.com/cuda-90-download-archive)
+-base installerë¶€í„° ì„¤ì¹˜í•˜ê³  íŒ¨ì¹˜ë“¤ ê¹”ë©´ë¨.
+-patch1ì´ ì„¤ì¹˜ í”„ë¡œê·¸ëž¨ì„ ì•ˆë„ì›Œì£¼ë˜ë° ê·¸ëƒ¥ ë¬´ì‹œí–ˆìŒ.
+-ì¤‘ê°„ì— Visual Studioë¥¼ ë¨¼ì € ê¹”ì•„ì•¼ Full functionì„ ì‚¬ìš©í•  ìˆ˜ ìžˆë‹¤ê³  í•˜ëŠ”ë° ì—¬íƒœê¹Œì§€ ë¬´ì‹œí•˜ê³  ìž˜ ì¼ì—ˆìŒ(... ê·¸ëž˜ë„ í˜¹ì‹œ ëª°ë¼ì„œ ì§€ê¸ˆì€ ê¹”ì•„ë’€ì–´ìš”!ã…Žã…Ž)
+3.cudnn 7.4.1 ì„¤ì¹˜(https://developer.nvidia.com/cudnn)
+-ì„¤ì¹˜ë°©ë²•:https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#prerequisites-windows
+-ê¼­ 7.4.1ì´ ì•„ë‹ˆë”ë¼ë„ CUDA 9.0ê³¼ í˜¸í™˜ë˜ë©´ ë©ë‹ˆë‹¤.
+4.python 3.6.7 ì„¤ì¹˜(1/30, 3.6.8ë„ ë¨)
+5.anaconda ì„¤ì¹˜(Just to me, Pathì— ì¶”ê°€)
+6.í™˜ê²½ë³€ìˆ˜ì— C:\Users\user\Anaconda3\Scripts ì¶”ê°€
+7.conda python ë²„ì „ 3.6.7ë¡œ ë³€ê²½(conda install python=3.6.7, ìœ„ì—ì„œ 3.6.7ì´ ì•„ë‹ˆë¼ ë‹¤ë¥¸ ë²„ì „ìœ¼ë¡œ í–ˆë‹¤ë©´ ê·¸ ë²„ì „ìœ¼ë¡œ)
+-ê²½ìš°ì— ë”°ë¼ solving environmentê°€ ëª‡ì‹­ë¶„ ê±¸ë¦´ ìˆ˜ë„ ìžˆìŒ
+-ë‹¤ ëë‚˜ë©´ doneí•˜ê³  ê¹œë¹¡ê±°ë¦¬ëŠ”ë° ê·¸ëƒ¥ êº¼ë„ë¨
 8.conda create -n DLC2 python=3.6
 9.activate DLC2
 10.pip install --ignore-installed deeplabcut
--ÀÌ·± ¸Þ¼¼Áö°¡ ¶ã ¼öµµ ÀÖ´Ù. ¾Æ·¡¿¡ ÀÖ´Â ¼¼°¡Áö´Â ±ò·ÁÀÖ´Â ¹öÀüÀÌ ´õ ³ô±âµµÇÏ°í ¹öÀüÀÌ ¾î¶»µç »ç½Ç »ó°ü¾ø´Âµ¥..´Ù¸¥ ÇÁ·Î±×·¥ÀÌ¸é ¹®Á¦°¡ µÉ ¼öµµ ÀÖ´Ù.
+-ì´ëŸ° ë©”ì„¸ì§€ê°€ ëœ° ìˆ˜ë„ ìžˆë‹¤. ì•„ëž˜ì— ìžˆëŠ” ì„¸ê°€ì§€ëŠ” ê¹”ë ¤ìžˆëŠ” ë²„ì „ì´ ë” ë†’ê¸°ë„í•˜ê³  ë²„ì „ì´ ì–´ë–»ë“  ì‚¬ì‹¤ ìƒê´€ì—†ëŠ”ë°..ë‹¤ë¥¸ í”„ë¡œê·¸ëž¨ì´ë©´ ë¬¸ì œê°€ ë  ìˆ˜ë„ ìžˆë‹¤.
 deeplabcut 2.0.0.dev5 has requirement ipython~=6.0.0, but you'll have ipython 7.1.1 which is incompatible.
 deeplabcut 2.0.0.dev5 has requirement python-dateutil==2.7.3, but you'll have python-dateutil 2.7.5 which is incompatible.
 deeplabcut 2.0.0.dev5 has requirement wheel==0.31.1, but you'll have wheel 0.32.2 which is incompatible.
--Æ¯Á¤ ¹öÀüÀ¸·Î ±ò°í ½Í´Ù¸é, pip install ipython(ÃÖ½Å¹öÀüÀ¸·Î ±ò¸²)ÀÌ ¾Æ´Ï¶ó pip install ipython==6.0.0Ã³·³ '=='À» »ç¿ëÇØ¼­ ¹öÀüÀ» ¸í½ÃÇÏ¸é µÈ´Ù.
+-íŠ¹ì • ë²„ì „ìœ¼ë¡œ ê¹”ê³  ì‹¶ë‹¤ë©´, pip install ipython(ìµœì‹ ë²„ì „ìœ¼ë¡œ ê¹”ë¦¼)ì´ ì•„ë‹ˆë¼ pip install ipython==6.0.0ì²˜ëŸ¼ '=='ì„ ì‚¬ìš©í•´ì„œ ë²„ì „ì„ ëª…ì‹œí•˜ë©´ ëœë‹¤.
 11.pip install -U wxPython
 12.pip install tensorflow-gpu==1.8
-13.ipythonÀ¸·Î ÆÄÀÌ½ã ¼¼¼ÇÀ» ¿­°í ´ÙÀ½ ¸í·É¾î·Î ¼³Ä¡ È®ÀÎ
+13.ipythonìœ¼ë¡œ íŒŒì´ì¬ ì„¸ì…˜ì„ ì—´ê³  ë‹¤ìŒ ëª…ë ¹ì–´ë¡œ ì„¤ì¹˜ í™•ì¸
 import tensorflow as tf
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-14.DeepLabCutÀ» ¹ÙÅÁÈ­¸é¿¡ ´Ù¿î·Îµå (https://github.com/AlexEMG/DeepLabCut)
--»ç½Ç ÇÊ¿äÇÑ°Ç ipynbÆÄÀÏµé »ÓÀÔ´Ï´Ù(¹ÙÅÁÈ­¸é¿¡ ±î´Â°Ç ²®µ¥±â?ÀÔ´Ï´Ù. ½ÇÁ¦ ¾Ë¸ÍÀÌ´Â C:\Users\user\Anaconda3\envs\DLC2\Lib\site-packages\deeplabcut ¿©±â¿¡ ÀÌ¹Ì ÀÖÀ» °Ì´Ï´Ù)
-±×·¡¼­ ¹ÙÅÁÈ­¸é¿¡ projects Æú´õ¸¦ ¸¸µç µÚ °Å±â¿¡ ÇÊ¿äÇÑ ipynbÆÄÀÏ¸¸ Áý¾î³Ö°í ³ª¸ÓÁö ÆÄÀÏµéÀº ¹ö¸®¸é µË´Ï´Ù. Ã³À½ ½ÃÀÛÇÏ½Ã´Â °Å¶ó¸é examples¿¡ ÀÖ´Â Demo_yourowndata.ipynbÆÄÀÏÀ» ¿­¸é µÉ °Ì´Ï´Ù.
-15.conda install nb_conda_kernels(activate ¾ÈÇÑ»óÅÂ·Î)
-16.conda install nb_conda(activate ¾ÈÇÑ»óÅÂ·Î)
-17.conda install ipykernel(activate ÇÑ»óÅÂ·Î)
-18.activate DLC2ÇØ³õ°í ´Ù¸¥ cmd°ü¸®ÀÚ Ã¢À» ¿­¾î¼­ ´ÙÀ½ ¸í·É¾î¸¦ ÀÔ·ÂÇØ jupyter notebookÀ» ¿¬´Ù.
+14.DeepLabCutì„ ë°”íƒ•í™”ë©´ì— ë‹¤ìš´ë¡œë“œ (https://github.com/AlexEMG/DeepLabCut)
+-ì‚¬ì‹¤ í•„ìš”í•œê±´ ipynbíŒŒì¼ë“¤ ë¿ìž…ë‹ˆë‹¤(ë°”íƒ•í™”ë©´ì— ê¹ŒëŠ”ê±´ ê»ë°ê¸°?ìž…ë‹ˆë‹¤. ì‹¤ì œ ì•Œë§¹ì´ëŠ” C:\Users\user\Anaconda3\envs\DLC2\Lib\site-packages\deeplabcut ì—¬ê¸°ì— ì´ë¯¸ ìžˆì„ ê²ë‹ˆë‹¤)
+ê·¸ëž˜ì„œ ë°”íƒ•í™”ë©´ì— projects í´ë”ë¥¼ ë§Œë“  ë’¤ ê±°ê¸°ì— í•„ìš”í•œ ipynbíŒŒì¼ë§Œ ì§‘ì–´ë„£ê³  ë‚˜ë¨¸ì§€ íŒŒì¼ë“¤ì€ ë²„ë¦¬ë©´ ë©ë‹ˆë‹¤. ì²˜ìŒ ì‹œìž‘í•˜ì‹œëŠ” ê±°ë¼ë©´ examplesì— ìžˆëŠ” Demo_yourowndata.ipynbíŒŒì¼ì„ ì—´ë©´ ë  ê²ë‹ˆë‹¤.
+15.conda install nb_conda_kernels(activate ì•ˆí•œìƒíƒœë¡œ)
+16.conda install nb_conda(activate ì•ˆí•œìƒíƒœë¡œ)
+17.conda install ipykernel(activate í•œìƒíƒœë¡œ)
+18.activate DLC2í•´ë†“ê³  ë‹¤ë¥¸ cmdê´€ë¦¬ìž ì°½ì„ ì—´ì–´ì„œ ë‹¤ìŒ ëª…ë ¹ì–´ë¥¼ ìž…ë ¥í•´ jupyter notebookì„ ì—°ë‹¤.
 cd c:\Users\user\Desktop
 jupyter notebook
--[nb_conda_kernels] enabled, 1 kernels found¶ó´Â ¹®±¸°¡ ¶°¾ßÇÔ(¾È¶ã°æ¿ì 15~17¹øÁß ¹«¾ð°¡°¡ ¾ÈµÈ °ÍÀÓ)
--jupyter notebook À¥¿¡¼­´Â ÆÄÀÏ »èÁ¦ È¤Àº Ãß°¡ ¸í·ÉÀ» ¾È³»¸®´Â °ÍÀÌ ÁÁÀ½(¸Å¿ì ´À¸².. ´ë½Å Á÷Á¢ ÄÄÇ»ÅÍ¿¡¼­ »èÁ¦ÇÏ°Å³ª Ãß°¡ÇÏ¸é µÊ)
--chromeÀ¸·Î ¾È¿­¸± °æ¿ì SET BROWSER=google-chrome Ä¡°í ´Ù½Ã ½ÇÇàÇÏ¸é µÊ
--´ÙÀ½ ½ÃÀÛºÎÅÍ´Â activate¸¦ ¾ÈÇÏ°í µÚ¿¡ µÎ°³ÀÇ ¸í·É¾î¸¸ Ä¡¸é µÊ(1/29)
-19.DeepLabCut-master¿¡ µé¾î°£ ÈÄ examples¿¡ µé¾î°¨
--Áö±ÝÀº projectµé¸¸ ÀÖ´Â Æú´õ¸¸ ³²°ÜµÎ¾î¼­ projectsÆú´õ·Î µé¾î°¡¸é µË´Ï´Ù(1/28)
-20.Demo_yourowndata.ipynb¸¦ ¿¬´Ù.
--project Æú´õ¿¡¼­ ¿øÇÏ´Â ipynbÆÄÀÏÀ» ¿­¸é µË´Ï´Ù(1/28)
-21.Kernel>Change kernel¿¡¼­ Python[conda:env DLC2]¸¦ Å¬¸¯ÇÔ
--AttributeError: '_tkinter.tkapp' object has no attribute 'createfilehandler'¿¡·¯°¡ ³¯ °æ¿ì ÇöÀç·Î½ã ±×³É ¹«½ÃÇÏ´Â°Ô ÁÁ¾Æº¸ÀÓ. https://github.com/ipython/ipykernel/blob/249354dc791455eb5b9f499629ecd3c053d43be0/ipykernel/eventloops.py·Î µé¾î°¡¼­ ÄÚµå¸¦ Ä«ÇÇÇØ ±âÁ¸ eventloop.py(¿¡·¯¸Þ¼¼Áö¸¦ º¸¸é ¾îµðÀÖ´ÂÁö ¾Ë ¼ö ÀÖÀ½)¸¦ ¹Ù²ãÁÖ¸é ¿¡·¯°¡ ¾ø¾îÁö±äÇÏÁö¸¸ ÀÌÈÄ LabelingÄÚµå°¡ ½ÇÇàÀÌ ¾ÈµÊ. 
+-[nb_conda_kernels] enabled, 1 kernels foundë¼ëŠ” ë¬¸êµ¬ê°€ ë– ì•¼í•¨(ì•ˆëœ°ê²½ìš° 15~17ë²ˆì¤‘ ë¬´ì–¸ê°€ê°€ ì•ˆëœ ê²ƒìž„)
+-jupyter notebook ì›¹ì—ì„œëŠ” íŒŒì¼ ì‚­ì œ í˜¹ì€ ì¶”ê°€ ëª…ë ¹ì„ ì•ˆë‚´ë¦¬ëŠ” ê²ƒì´ ì¢‹ìŒ(ë§¤ìš° ëŠë¦¼.. ëŒ€ì‹  ì§ì ‘ ì»´í“¨í„°ì—ì„œ ì‚­ì œí•˜ê±°ë‚˜ ì¶”ê°€í•˜ë©´ ë¨)
+-chromeìœ¼ë¡œ ì•ˆì—´ë¦´ ê²½ìš° SET BROWSER=google-chrome ì¹˜ê³  ë‹¤ì‹œ ì‹¤í–‰í•˜ë©´ ë¨
+-ë‹¤ìŒ ì‹œìž‘ë¶€í„°ëŠ” activateë¥¼ ì•ˆí•˜ê³  ë’¤ì— ë‘ê°œì˜ ëª…ë ¹ì–´ë§Œ ì¹˜ë©´ ë¨(1/29)
+19.DeepLabCut-masterì— ë“¤ì–´ê°„ í›„ examplesì— ë“¤ì–´ê°
+-ì§€ê¸ˆì€ projectë“¤ë§Œ ìžˆëŠ” í´ë”ë§Œ ë‚¨ê²¨ë‘ì–´ì„œ projectsí´ë”ë¡œ ë“¤ì–´ê°€ë©´ ë©ë‹ˆë‹¤(1/28)
+20.Demo_yourowndata.ipynbë¥¼ ì—°ë‹¤.
+-project í´ë”ì—ì„œ ì›í•˜ëŠ” ipynbíŒŒì¼ì„ ì—´ë©´ ë©ë‹ˆë‹¤(1/28)
+21.Kernel>Change kernelì—ì„œ Python[conda:env DLC2]ë¥¼ í´ë¦­í•¨
+-AttributeError: '_tkinter.tkapp' object has no attribute 'createfilehandler'ì—ëŸ¬ê°€ ë‚  ê²½ìš° í˜„ìž¬ë¡œì¬ ê·¸ëƒ¥ ë¬´ì‹œí•˜ëŠ”ê²Œ ì¢‹ì•„ë³´ìž„. https://github.com/ipython/ipykernel/blob/249354dc791455eb5b9f499629ecd3c053d43be0/ipykernel/eventloops.pyë¡œ ë“¤ì–´ê°€ì„œ ì½”ë“œë¥¼ ì¹´í”¼í•´ ê¸°ì¡´ eventloop.py(ì—ëŸ¬ë©”ì„¸ì§€ë¥¼ ë³´ë©´ ì–´ë””ìžˆëŠ”ì§€ ì•Œ ìˆ˜ ìžˆìŒ)ë¥¼ ë°”ê¿”ì£¼ë©´ ì—ëŸ¬ê°€ ì—†ì–´ì§€ê¸´í•˜ì§€ë§Œ ì´í›„ Labelingì½”ë“œê°€ ì‹¤í–‰ì´ ì•ˆë¨. 
 
-¹öÀüÀÌ ¾÷µ¥ÀÌÆ® µÉ ¶§¸¶´Ù ÇÒ ÀÏ
-1.pip install --ignore-installed deeplabcut(activate DLC2 ÇÑ »óÅÂ·Î)
-2.DeepLabCutÀ» ¹ÙÅÁÈ­¸é¿¡ ´Ù½Ã ´Ù¿î·Îµå
--»ç½Ç ´Ù½Ã ´Ù¿î·Îµå ÇÒ ÇÊ¿ä´Â ¾ø½À´Ï´Ù. ÇÏÁö¸¸ ¾÷µ¥ÀÌÆ®¸¦ Àß º¸°í ÇÔ¼ö »ç¿ë¹ýÀÌ ´Þ¶óÁ³À» °æ¿ì Àß ¹Ý¿µÇØÁÖ´Â °ÍÀÌ ÁÁ½À´Ï´Ù(¸ð¸£°ÚÀ¸¸é ´Ù½Ã ´Ù¿î·Îµå ¹Þ¾Æ¼­ ±× ¾È¿¡ ÀÖ´Â Demo_yourowndata.ipynbÆÄÀÏÀ» º¸°í ÇÔ¼ö¸¦ ¾î¶»°Ô ¾²´ÂÁö È®ÀÎÇØº¸¸é µÇ°ÚÁÒ?¤¾¤¾ ¿¹¸¦ µé¾î ÇÔ¼ö¿¡ ³Ö´Â parameterÀÇ °³¼ö°¡ ´Þ¶óÁø´Ù°Å³ª, »õ·Î¿î parameter°¡ µîÀåÇÑ´Ù°Å³ª, »õ·Î¿î ÇÔ¼ö°¡ Ãß°¡µÉ ¼öµµ ÀÖ½À´Ï´Ù)
-3.18¹øºÎÅÍ ´Ù½Ã ½ÃÀÛ
--ImportError: cannot import name 'generator_to_async_generator'°¡ ³ª¸é¼­ Ä¿³Ú ½ÃÀÛÀÌ ¾ÈµÉ °æ¿ì Áö¿ï ÆÄÀÏÀÌ ¾ø´Ù´Â ³ë¶õ»ö ±Û¾¾°¡ ¶ã¶§±îÁö pip uninstall -y ipython prompt_toolkitÀ» ÇÑ ÈÄ pip install ipython prompt_toolkit¸¦ ÇÏ¸é µÊ.
-*ÇÏÁö¸¸ Á¦°¡ GUI ¼öÁ¤, ¹ö±× ¼öÁ¤, Ãß°¡ ±â´É(Labeling Restart µîµî)À» À§ÇØ ÀÌ¹Ì ÄÚµå¸¦ ¸¹ÀÌ °Çµå·Á³õ¾ÒÀ¸¹Ç·Î, ¾÷µ¥ÀÌÆ®°¡ Á¤¸» criticalÇÑ°Ô ¾Æ´Ï¶ó¸é ¾ÈÇÏ½Ã´Â °ÍÀÌ ÁÁ½À´Ï´Ù. ¾÷µ¥ÀÌÆ®¸¦ ÇØ¾ßÇÑ´Ù¸é, DLC2(C:\Users\user\Anaconda3\envs\DLC2)¿¡ ÀÖ´Â ÄÚµå¸¦ ´Ù¸¥ °÷À¸·Î ¿Å°Ü³õÀº µÚ ¾÷µ¥ÀÌÆ®¸¦ ÇÏ°í, Á¦ ÄÚµå¿Í Àß mergingÇÏ½Ã±æ ºÎÅ¹µå¸³´Ï´Ù. °æÇè´ãÀ¸·Î ¾÷µ¥ÀÌÆ®¸¦ Çß´Ù°¡ ¾Èµ¹¾Æ°¡´Â °æ¿ìµµ ¸¹½À´Ï´Ù(... µö·¦ÄÆ ÆÀÀÌ ÀÌ ÄÄÇ»ÅÍ¿Í ¶È°°Àº È¯°æ¿¡¼­ °³¹ßÇÏ´Â °ÍÀÌ ¾Æ´Ï±â ¶§¹®¿¡ ±×·± °Í °°½À´Ï´Ù. ±×·¡¼­ Ç×»ó ¹é¾÷À» Àß ÇØµÎ¼¼¿ä!)
-*¸¶Áö¸·À¸·Î MergingÀ» ½ÃÀÛÇÑ µö·¦ÄÆ ¹öÀü: https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8(1/29)
+ë²„ì „ì´ ì—…ë°ì´íŠ¸ ë  ë•Œë§ˆë‹¤ í•  ì¼
+1.pip install --ignore-installed deeplabcut(activate DLC2 í•œ ìƒíƒœë¡œ)
+2.DeepLabCutì„ ë°”íƒ•í™”ë©´ì— ë‹¤ì‹œ ë‹¤ìš´ë¡œë“œ
+-ì‚¬ì‹¤ ë‹¤ì‹œ ë‹¤ìš´ë¡œë“œ í•  í•„ìš”ëŠ” ì—†ìŠµë‹ˆë‹¤. í•˜ì§€ë§Œ ì—…ë°ì´íŠ¸ë¥¼ ìž˜ ë³´ê³  í•¨ìˆ˜ ì‚¬ìš©ë²•ì´ ë‹¬ë¼ì¡Œì„ ê²½ìš° ìž˜ ë°˜ì˜í•´ì£¼ëŠ” ê²ƒì´ ì¢‹ìŠµë‹ˆë‹¤(ëª¨ë¥´ê² ìœ¼ë©´ ë‹¤ì‹œ ë‹¤ìš´ë¡œë“œ ë°›ì•„ì„œ ê·¸ ì•ˆì— ìžˆëŠ” Demo_yourowndata.ipynbíŒŒì¼ì„ ë³´ê³  í•¨ìˆ˜ë¥¼ ì–´ë–»ê²Œ ì“°ëŠ”ì§€ í™•ì¸í•´ë³´ë©´ ë˜ê² ì£ ?ã…Žã…Ž ì˜ˆë¥¼ ë“¤ì–´ í•¨ìˆ˜ì— ë„£ëŠ” parameterì˜ ê°œìˆ˜ê°€ ë‹¬ë¼ì§„ë‹¤ê±°ë‚˜, ìƒˆë¡œìš´ parameterê°€ ë“±ìž¥í•œë‹¤ê±°ë‚˜, ìƒˆë¡œìš´ í•¨ìˆ˜ê°€ ì¶”ê°€ë  ìˆ˜ë„ ìžˆìŠµë‹ˆë‹¤)
+3.18ë²ˆë¶€í„° ë‹¤ì‹œ ì‹œìž‘
+-ImportError: cannot import name 'generator_to_async_generator'ê°€ ë‚˜ë©´ì„œ ì»¤ë„¬ ì‹œìž‘ì´ ì•ˆë  ê²½ìš° ì§€ìš¸ íŒŒì¼ì´ ì—†ë‹¤ëŠ” ë…¸ëž€ìƒ‰ ê¸€ì”¨ê°€ ëœ°ë•Œê¹Œì§€ pip uninstall -y ipython prompt_toolkitì„ í•œ í›„ pip install ipython prompt_toolkitë¥¼ í•˜ë©´ ë¨.
+*í•˜ì§€ë§Œ ì œê°€ GUI ìˆ˜ì •, ë²„ê·¸ ìˆ˜ì •, ì¶”ê°€ ê¸°ëŠ¥(Labeling Restart ë“±ë“±)ì„ ìœ„í•´ ì´ë¯¸ ì½”ë“œë¥¼ ë§Žì´ ê±´ë“œë ¤ë†“ì•˜ìœ¼ë¯€ë¡œ, ì—…ë°ì´íŠ¸ê°€ ì •ë§ criticalí•œê²Œ ì•„ë‹ˆë¼ë©´ ì•ˆí•˜ì‹œëŠ” ê²ƒì´ ì¢‹ìŠµë‹ˆë‹¤. ì—…ë°ì´íŠ¸ë¥¼ í•´ì•¼í•œë‹¤ë©´, DLC2(C:\Users\user\Anaconda3\envs\DLC2)ì— ìžˆëŠ” ì½”ë“œë¥¼ ë‹¤ë¥¸ ê³³ìœ¼ë¡œ ì˜®ê²¨ë†“ì€ ë’¤ ì—…ë°ì´íŠ¸ë¥¼ í•˜ê³ , ì œ ì½”ë“œì™€ ìž˜ mergingí•˜ì‹œê¸¸ ë¶€íƒë“œë¦½ë‹ˆë‹¤. ê²½í—˜ë‹´ìœ¼ë¡œ ì—…ë°ì´íŠ¸ë¥¼ í–ˆë‹¤ê°€ ì•ˆëŒì•„ê°€ëŠ” ê²½ìš°ë„ ë§ŽìŠµë‹ˆë‹¤(... ë”¥ëž©ì»· íŒ€ì´ ì´ ì»´í“¨í„°ì™€ ë˜‘ê°™ì€ í™˜ê²½ì—ì„œ ê°œë°œí•˜ëŠ” ê²ƒì´ ì•„ë‹ˆê¸° ë•Œë¬¸ì— ê·¸ëŸ° ê²ƒ ê°™ìŠµë‹ˆë‹¤. ê·¸ëž˜ì„œ í•­ìƒ ë°±ì—…ì„ ìž˜ í•´ë‘ì„¸ìš”!)
+*ë§ˆì§€ë§‰ìœ¼ë¡œ Mergingì„ ì‹œìž‘í•œ ë”¥ëž©ì»· ë²„ì „: https://github.com/altairlight/DeepLabCut/commit/195c32e3aa05fce46c57639e238ab3525682ccb8(1/29)
 
-¹°¾îº¼ ¼ö ÀÖ´Â °÷/µµ¿òÀ» ¹ÞÀ» ¼ö ÀÖ´Â °÷
+ë¬¼ì–´ë³¼ ìˆ˜ ìžˆëŠ” ê³³/ë„ì›€ì„ ë°›ì„ ìˆ˜ ìžˆëŠ” ê³³
 1.https://forum.image.sc/tags/deeplabcut
-´ëºÎºÐÀÇ Áú¹®À» ¿©±â¼­ ÇÒ ¼ö ÀÖ´Ù. ¸ð¸£´Â °Íµéµµ Ã£¾Æº¸¸é ¿©±â¿¡ ÀÖ´Â °æ¿ì°¡ ¸¹À¸¹Ç·Î °Ë»öÇØº¸°í ¾øÀ¸¸é Áú¹®À» ¿Ã¸®¸é µÈ´Ù.
+ëŒ€ë¶€ë¶„ì˜ ì§ˆë¬¸ì„ ì—¬ê¸°ì„œ í•  ìˆ˜ ìžˆë‹¤. ëª¨ë¥´ëŠ” ê²ƒë“¤ë„ ì°¾ì•„ë³´ë©´ ì—¬ê¸°ì— ìžˆëŠ” ê²½ìš°ê°€ ë§Žìœ¼ë¯€ë¡œ ê²€ìƒ‰í•´ë³´ê³  ì—†ìœ¼ë©´ ì§ˆë¬¸ì„ ì˜¬ë¦¬ë©´ ëœë‹¤.
 2.https://deeplabcut.slack.com/messages
-general¿¡¼­ ÀÌ·±Àú·± ¾ê±â°¡ ¿À°í°£´Ù(¾÷µ¥ÀÌÆ® ¼Ò½Ä, ¹ö±× ¾Ë¸², °³¹ß ¼Ò½Ä µîµî)
-±âÁ¸¿¡ °¡º­¿î Áú¹®À» ¿©±â¿¡ ÀÖ´Â help-desk¿¡¼­ ÁÖ·Î Çß¾úÀ¸³ª, ÀÌÁ¦´Â ¿©±â¼± ¾ÈÇÏ´Â ¸ð¾çÀÌ´Ù.
+generalì—ì„œ ì´ëŸ°ì €ëŸ° ì–˜ê¸°ê°€ ì˜¤ê³ ê°„ë‹¤(ì—…ë°ì´íŠ¸ ì†Œì‹, ë²„ê·¸ ì•Œë¦¼, ê°œë°œ ì†Œì‹ ë“±ë“±)
+ê¸°ì¡´ì— ê°€ë²¼ìš´ ì§ˆë¬¸ì„ ì—¬ê¸°ì— ìžˆëŠ” help-deskì—ì„œ ì£¼ë¡œ í–ˆì—ˆìœ¼ë‚˜, ì´ì œëŠ” ì—¬ê¸°ì„  ì•ˆí•˜ëŠ” ëª¨ì–‘ì´ë‹¤.
 3.https://github.com/AlexEMG/DeepLabCut/issues
-°ú°Å¿¡ ¹«°Å¿î Áú¹®µéÀ» ÁÖ·Î ¿©±â¿¡ ¿Ã·È´Ù. ±×·¡¼­ ¸ð¸£´Â °ÍµéÀ» Ã£¾Æº¸¸é ¿©±â¿¡ ÀÖ´Â °æ¿ìµµ ¸¹´Ù. ÇÏÁö¸¸ ¿äÁòµµ Å« ¿¡·¯³ª ½É°¢ÇÑ ¹ö±×°°Àº °æ¿ì, È¤Àº ÀüÃ¼ ¿¡·¯¸¦ ±Ü¾î¼­ ±æ°Ô ¿Ã·Á¾ßÇÏ´Â °æ¿ì¿¡ ¿©±â·Î ¸¹ÀÌ ¹°¾îº¸´Â µíÇÏ´Ù. ´äº¯À» µö·¦ÄÆÆÀÀ¸·Î ºü¸£°Ô ¾òÀ» ¼ö ÀÖ´Ù´Â ÀåÁ¡ÀÌ ÀÖ´Ù. ¹°·Ð, ¿øÇÏ´Â ÇØ´äÀ» ¾òÀ» ¶§±îÁö °è¼ÓÇØ¼­ ¹°¾îºÁ¾ß ÇÑ´Ù(È¯°æÀÌ ´Ù¸£±â¶§¹®¿¡, "¿ì¸® ÄÄÇ»ÅÍ¿¡¼­´Â ÀßµÇ´Âµ¥¿ä?" ³»Áö´Â "ÀÌ·¸°Ô ÇÏ½Ã¸é µÉ °Ì´Ï´Ù."·Î ´äº¯ÀÌ ³¡³ª°í closed µÇ´Â °æ¿ìµµ ÀÖ´Ù...)
+ê³¼ê±°ì— ë¬´ê±°ìš´ ì§ˆë¬¸ë“¤ì„ ì£¼ë¡œ ì—¬ê¸°ì— ì˜¬ë ¸ë‹¤. ê·¸ëž˜ì„œ ëª¨ë¥´ëŠ” ê²ƒë“¤ì„ ì°¾ì•„ë³´ë©´ ì—¬ê¸°ì— ìžˆëŠ” ê²½ìš°ë„ ë§Žë‹¤. í•˜ì§€ë§Œ ìš”ì¦˜ë„ í° ì—ëŸ¬ë‚˜ ì‹¬ê°í•œ ë²„ê·¸ê°™ì€ ê²½ìš°, í˜¹ì€ ì „ì²´ ì—ëŸ¬ë¥¼ ê¸ì–´ì„œ ê¸¸ê²Œ ì˜¬ë ¤ì•¼í•˜ëŠ” ê²½ìš°ì— ì—¬ê¸°ë¡œ ë§Žì´ ë¬¼ì–´ë³´ëŠ” ë“¯í•˜ë‹¤. ë‹µë³€ì„ ë”¥ëž©ì»·íŒ€ìœ¼ë¡œ ë¹ ë¥´ê²Œ ì–»ì„ ìˆ˜ ìžˆë‹¤ëŠ” ìž¥ì ì´ ìžˆë‹¤. ë¬¼ë¡ , ì›í•˜ëŠ” í•´ë‹µì„ ì–»ì„ ë•Œê¹Œì§€ ê³„ì†í•´ì„œ ë¬¼ì–´ë´ì•¼ í•œë‹¤(í™˜ê²½ì´ ë‹¤ë¥´ê¸°ë•Œë¬¸ì—, "ìš°ë¦¬ ì»´í“¨í„°ì—ì„œëŠ” ìž˜ë˜ëŠ”ë°ìš”?" ë‚´ì§€ëŠ” "ì´ë ‡ê²Œ í•˜ì‹œë©´ ë  ê²ë‹ˆë‹¤."ë¡œ ë‹µë³€ì´ ëë‚˜ê³  closed ë˜ëŠ” ê²½ìš°ë„ ìžˆë‹¤...)
 4.https://www.youtube.com/watch?v=7xwOhUcIGio
-Æ©Åä¸®¾ó ¿µ»óÀ» Á¦°øÇÑ´Ù. ´Ù¸¸ deeplabcut ¹öÀüÀÌ ¾÷±×·¹ÀÌµåµÇ¸é¼­ ¿µ»ó¿¡ ³ª¿Â °Í°ú ´Þ¶óÁö´Â °ÍµéÀÌ ¸¹¾ÆÁö°í ÀÖ±â¿¡ Á¶½ÉÇÏÀÚ!
+íŠœí† ë¦¬ì–¼ ì˜ìƒì„ ì œê³µí•œë‹¤. ë‹¤ë§Œ deeplabcut ë²„ì „ì´ ì—…ê·¸ë ˆì´ë“œë˜ë©´ì„œ ì˜ìƒì— ë‚˜ì˜¨ ê²ƒê³¼ ë‹¬ë¼ì§€ëŠ” ê²ƒë“¤ì´ ë§Žì•„ì§€ê³  ìžˆê¸°ì— ì¡°ì‹¬í•˜ìž!
